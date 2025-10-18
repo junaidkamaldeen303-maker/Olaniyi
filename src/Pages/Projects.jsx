@@ -234,9 +234,9 @@ export default function Projects() {
                       }}
                       onClick={() => setSelectedProject(project)}
                     >
-                      {/* Featured Badge */}
+                      {/* Featured Badge - Moved up */}
                       {project.featured && (
-                        <Box sx={{ position: "absolute", top: 12, right: 12, zIndex: 2 }}>
+                        <Box sx={{ position: "absolute", top: 8, right: 8, zIndex: 2 }}>
                           <Chip 
                             label="Featured" 
                             size="small"
