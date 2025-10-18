@@ -97,7 +97,7 @@ export default function Footer() {
             </IconButton>
             <IconButton
               component="a"
-              href="https://github.com/yourusername"
+              href="https://github.com/junaidkamaldeen303-maker"
               target="_blank"
               rel="noopener noreferrer"
               sx={{ color: "#fff", "&:hover": { color: "#6000FF" } }}

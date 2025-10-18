@@ -1,5 +1,5 @@
 // src/Pages/Contact.jsx
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Box,
   TextField,
@@ -34,6 +34,12 @@ export default function Contact() {
     message: ""
   });
 
+  const [counters, setCounters] = useState({
+    responseTime: 0,
+    projects: 0,
+    satisfaction: 0
+  });
+
   const sendEmail = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -66,9 +72,9 @@ export default function Contact() {
   };
 
   const contactStats = [
-    { number: "24h", label: "Response Time" },
-    { number: "15+", label: "Projects Delivered" },
-    { number: "100%", label: "Client Satisfaction" }
+    { number: counters.responseTime, label: "Response Time", suffix: "h", target: 24 },
+    { number: counters.projects, label: "Projects Delivered", suffix: "+", target: 15 },
+    { number: counters.satisfaction, label: "Client Satisfaction", suffix: "%", target: 100 }
   ];
 
   const techStack = ["React", "Node.js", "TypeScript", "MongoDB", "AWS"];
@@ -83,13 +89,13 @@ export default function Contact() {
     {
       icon: <GitHubIcon />,
       label: "GitHub", 
-      url: "https://github.com/yourusername",
+      url: "https://github.com/junaidkamaldeen303-maker",
       color: "#6e5494"
     },
     {
       icon: <WhatsAppIcon />,
       label: "WhatsApp",
-      url: "https://wa.me/2348012345678",
+      url: "https://wa.me/2348124016354",
       color: "#25D366"
     }
   ];
@@ -115,6 +121,37 @@ export default function Contact() {
       }
     }
   };
+
+  // Count up animation
+  useEffect(() => {
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const stepDuration = duration / steps;
+
+    const animateCounter = (key, target) => {
+      let currentStep = 0;
+      const stepValue = target / steps;
+
+      const timer = setInterval(() => {
+        currentStep++;
+        const currentValue = Math.min(Math.floor(stepValue * currentStep), target);
+        
+        setCounters(prev => ({
+          ...prev,
+          [key]: currentValue
+        }));
+
+        if (currentStep >= steps) {
+          clearInterval(timer);
+        }
+      }, stepDuration);
+    };
+
+    // Start animations with slight delays for staggered effect
+    setTimeout(() => animateCounter('responseTime', 24), 300);
+    setTimeout(() => animateCounter('projects', 15), 600);
+    setTimeout(() => animateCounter('satisfaction', 100), 900);
+  }, []);
 
   return (
     <Box
@@ -229,12 +266,12 @@ export default function Contact() {
                         {
                           icon: <EmailIcon sx={{ color: "#6000FF" }} />,
                           title: "Email",
-                          value: "olaniyikamal303@gmail.com",
+                          value: "olaniyikam@gmail.com",
                         },
                         {
                           icon: <PhoneIcon sx={{ color: "#00FFFF" }} />,
                           title: "Phone",
-                          value: "+234 801 234 5678",
+                          value: "+234 8124016354",
                         },
                         {
                           icon: <LocationOnIcon sx={{ color: "#FF6B6B" }} />,
@@ -320,7 +357,7 @@ export default function Contact() {
                               fontSize: "1.5rem"
                             }}
                           >
-                            {stat.number}
+                            {stat.number}{stat.suffix}
                           </Typography>
                           <Typography
                             variant="caption"
