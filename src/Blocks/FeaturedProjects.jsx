@@ -79,7 +79,7 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: "#000B20", position: "relative" }}>
+    <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: "background.default", position: "relative" }}>
       {/* Background Pattern */}
       <Box
         sx={{
@@ -88,7 +88,7 @@ export default function FeaturedProjects() {
           left: 0,
           width: "100%",
           height: "100%",
-          background: "radial-gradient(circle at 20% 80%, rgba(96,0,255,0.1) 0%, transparent 50%)",
+          background: `radial-gradient(circle at 20% 80%, ${theme.palette.primary.main}1a 0%, transparent 50%)`,
           zIndex: 1,
         }}
       />
@@ -100,7 +100,7 @@ export default function FeaturedProjects() {
             variant="h3"
             sx={{
               fontWeight: 700,
-              color: "white",
+              color: "text.primary",
               mb: 2,
               fontSize: { xs: "1.8rem", md: "2.5rem" }
             }}
@@ -110,7 +110,7 @@ export default function FeaturedProjects() {
           <Typography
             variant="h6"
             sx={{
-              color: "#A0A0A0",
+              color: "text.secondary",
               maxWidth: "500px",
               mx: "auto",
               fontSize: { xs: "0.9rem", md: "1.1rem" }
@@ -127,9 +127,9 @@ export default function FeaturedProjects() {
             height: { xs: "400px", md: "450px" },
             overflow: "hidden",
             borderRadius: "16px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            background: "rgba(255,255,255,0.02)",
-            backdropFilter: "blur(10px)"
+            border: "1px solid",
+            borderColor: "divider",
+            background: "background.paper",
           }}
         >
           <AnimatePresence mode="wait">
@@ -168,7 +168,7 @@ export default function FeaturedProjects() {
                       left: 0,
                       width: "100%",
                       height: "100%",
-                      background: "linear-gradient(90deg, rgba(0,11,32,0.8) 0%, transparent 100%)",
+                      background: `linear-gradient(90deg, ${theme.palette.background.default}cc 0%, transparent 100%)`,
                     }}
                   />
                 </Box>
@@ -181,7 +181,7 @@ export default function FeaturedProjects() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
-                    background: "rgba(0,11,32,0.9)",
+                    background: "background.paper",
                   }}
                 >
                   {/* Updated Category Label */}
@@ -189,12 +189,12 @@ export default function FeaturedProjects() {
                     <Typography
                       variant="overline"
                       sx={{
-                        color: "#6000FF",
+                        color: "primary.main",
                         fontWeight: 600,
                         fontSize: "0.75rem",
                         letterSpacing: "1px",
                         textTransform: "uppercase",
-                        backgroundColor: "rgba(96,0,255,0.1)",
+                        backgroundColor: "rgba(12,36,124,0.1)",
                         px: 2,
                         py: 0.5,
                         borderRadius: "12px",
@@ -209,7 +209,7 @@ export default function FeaturedProjects() {
                     variant="h4"
                     sx={{
                       fontWeight: 700,
-                      color: "white",
+                      color: "text.primary",
                       mb: 1.5,
                       fontSize: { xs: "1.3rem", md: "1.8rem" }
                     }}
@@ -220,7 +220,7 @@ export default function FeaturedProjects() {
                   <Typography
                     variant="body1"
                     sx={{
-                      color: "#A0A0A0",
+                      color: "text.secondary",
                       mb: 3,
                       lineHeight: 1.5,
                       fontSize: { xs: "0.85rem", md: "0.95rem" }
@@ -238,8 +238,8 @@ export default function FeaturedProjects() {
                         size="small"
                         variant="outlined"
                         sx={{
-                          color: "#00FFFF",
-                          borderColor: "#00FFFF",
+                          color: "secondary.main",
+                          borderColor: "secondary.main",
                           fontSize: "0.7rem",
                           height: "22px"
                         }}
@@ -264,7 +264,7 @@ export default function FeaturedProjects() {
               width: "40px",
               height: "40px",
               "&:hover": {
-                backgroundColor: "rgba(96,0,255,0.8)",
+                backgroundColor: "primary.main",
               }
             }}
           >
@@ -283,7 +283,7 @@ export default function FeaturedProjects() {
               width: "40px",
               height: "40px",
               "&:hover": {
-                backgroundColor: "rgba(96,0,255,0.8)",
+                backgroundColor: "primary.main",
               }
             }}
           >
@@ -300,11 +300,11 @@ export default function FeaturedProjects() {
                   width: 10,
                   height: 10,
                   borderRadius: "50%",
-                  backgroundColor: index === currentProject ? "#6000FF" : "rgba(255,255,255,0.3)",
+                  backgroundColor: index === currentProject ? "primary.main" : "rgba(255,255,255,0.3)",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    backgroundColor: index === currentProject ? "#6000FF" : "rgba(255,255,255,0.5)",
+                    backgroundColor: index === currentProject ? "primary.main" : "rgba(255,255,255,0.5)",
                   }
                 }}
               />
@@ -318,18 +318,18 @@ export default function FeaturedProjects() {
             variant="outlined"
             onClick={() => navigate('/projects')}
             sx={{
-              borderColor: "#6000FF",
-              color: "#6000FF",
+              borderColor: "primary.main",
+              color: "primary.main",
               px: 3,
               py: 1,
               borderRadius: "25px",
               fontWeight: 600,
               fontSize: "0.9rem",
               "&:hover": {
-                borderColor: "#7E3AFF",
-                color: "#7E3AFF",
-                backgroundColor: "rgba(126,58,255,0.08)",
-                boxShadow: "0 0 15px rgba(96,0,255,0.3)",
+                borderColor: "secondary.main",
+                color: "secondary.main",
+                backgroundColor: "rgba(12,36,124,0.08)",
+                boxShadow: "0 0 15px rgba(12,36,124,0.3)",
               }
             }}
           >

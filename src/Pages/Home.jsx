@@ -1,10 +1,11 @@
-// src/Pages/Home.jsx
 import React from "react";
 import HeroSection from "../Blocks/heroSection.jsx";
-import TechMarquee from "../Components/TechMarquee.jsx";
+import WorkflowSection from "../Blocks/WorkflowSection.jsx";
 import SkillsSection from "../Blocks/SkillsSection.jsx";
+import ResumeCTA from "../Blocks/ResumeCTA.jsx";
 import FeaturedProjects from "../Blocks/FeaturedProjects";
 import ContactSection from "../Blocks/ContactSection.jsx";
+import ShipStuffSection from "../Blocks/ShipStuffSection.jsx";
 
 export default function Home() {
   return (
@@ -17,10 +18,12 @@ export default function Home() {
       }}
     >
       <HeroSection />
-      <TechMarquee />
+      <WorkflowSection />
       <SkillsSection />
+      <ResumeCTA />
       <FeaturedProjects />
       <ContactSection />
+      <ShipStuffSection /> 
     </div>
   );
 }

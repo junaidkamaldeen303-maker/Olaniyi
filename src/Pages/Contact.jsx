@@ -1,4 +1,3 @@
-// src/Pages/Contact.jsx
 import React, { useRef, useState, useEffect } from "react";
 import {
   Box,
@@ -23,8 +22,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SendIcon from "@mui/icons-material/Send";
 import CodeIcon from "@mui/icons-material/Code";
+import { useTheme } from "../themes/theme";
 
 export default function Contact() {
+  const { darkMode } = useTheme();
   const form = useRef();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
@@ -124,7 +125,7 @@ export default function Contact() {
 
   // Count up animation
   useEffect(() => {
-    const duration = 2000; // 2 seconds
+    const duration = 2000;
     const steps = 60;
     const stepDuration = duration / steps;
 
@@ -147,7 +148,6 @@ export default function Contact() {
       }, stepDuration);
     };
 
-    // Start animations with slight delays for staggered effect
     setTimeout(() => animateCounter('responseTime', 24), 300);
     setTimeout(() => animateCounter('projects', 15), 600);
     setTimeout(() => animateCounter('satisfaction', 100), 900);
@@ -157,14 +157,14 @@ export default function Contact() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#000B20",
-        background: "linear-gradient(135deg, #000B20 0%, #0A1126 50%, #1A1F35 100%)",
-        color: "white",
+        backgroundColor: "background.default",
+        color: "text.primary",
         display: "flex",
         alignItems: "center",
         py: 8,
         position: "relative",
         overflow: "hidden",
+        transition: "background-color 0.3s ease",
       }}
     >
       {/* Background Elements */}
@@ -175,8 +175,9 @@ export default function Contact() {
           right: "5%",
           width: "300px",
           height: "300px",
-          background: "radial-gradient(circle, rgba(96,0,255,0.1) 0%, transparent 70%)",
+          background: `radial-gradient(circle, ${darkMode ? 'rgba(12,36,124,0.1)' : 'rgba(100,32,243,0.05)'} 0%, transparent 70%)`,
           borderRadius: "50%",
+          transition: "background 0.3s ease",
         }}
       />
       <Box
@@ -186,8 +187,9 @@ export default function Contact() {
           left: "5%",
           width: "200px",
           height: "200px",
-          background: "radial-gradient(circle, rgba(0,255,255,0.05) 0%, transparent 70%)",
+          background: `radial-gradient(circle, ${darkMode ? 'rgba(40,166,231,0.05)' : 'rgba(40,166,231,0.03)'} 0%, transparent 70%)`,
           borderRadius: "50%",
+          transition: "background 0.3s ease",
         }}
       />
 
@@ -204,25 +206,25 @@ export default function Contact() {
                 icon={<CodeIcon />}
                 label="LET'S CONNECT"
                 sx={{
-                  backgroundColor: "rgba(96,0,255,0.1)",
-                  color: "#6000FF",
-                  border: "1px solid #6000FF",
+                  backgroundColor: darkMode ? "rgba(12,36,124,0.1)" : "rgba(100,32,243,0.08)",
+                  color: "primary.main",
+                  border: "1px solid",
+                  borderColor: "primary.main",
                   fontWeight: 600,
                   mb: 3,
                   px: 2,
-                  py: 1
+                  py: 1,
+                  transition: "all 0.3s ease",
                 }}
               />
               <Typography
                 variant="h2"
                 sx={{
                   fontWeight: 800,
-                  background: "linear-gradient(45deg, #FFFFFF 30%, #A0A0A0 90%)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "text.primary",
                   mb: 2,
-                  fontSize: { xs: "2.5rem", md: "3rem" }
+                  fontSize: { xs: "2.5rem", md: "3rem" },
+                  transition: "color 0.3s ease",
                 }}
               >
                 Ready to Build Something Amazing?
@@ -230,10 +232,11 @@ export default function Contact() {
               <Typography
                 variant="h6"
                 sx={{
-                  color: "#A0A0A0",
+                  color: "text.secondary",
                   maxWidth: "600px",
                   mx: "auto",
-                  lineHeight: 1.6
+                  lineHeight: 1.6,
+                  transition: "color 0.3s ease",
                 }}
               >
                 Let's discuss your next project and bring your ideas to life with cutting-edge technology
@@ -245,31 +248,32 @@ export default function Contact() {
             {/* Left Panel - Contact Info & Stats */}
             <Grid item xs={12} lg={5}>
               <Stack spacing={3} sx={{ height: '100%' }}>
-                {/* Contact Information - Reduced & No Links */}
+                {/* Contact Information */}
                 <motion.div variants={itemVariants} style={{ height: '100%' }}>
                   <Card
                     sx={{
-                      backgroundColor: "rgba(255,255,255,0.03)",
-                      backdropFilter: "blur(20px)",
-                      border: "1px solid rgba(255,255,255,0.1)",
+                      backgroundColor: "background.paper",
+                      border: "1px solid",
+                      borderColor: "divider",
                       borderRadius: "20px",
                       p: 2,
-                      height: '100%'
+                      height: '100%',
+                      transition: "all 0.3s ease",
                     }}
                   >
-                    <Typography variant="h6" fontWeight={700} mb={2}>
+                    <Typography variant="h6" fontWeight={700} mb={2} color="text.primary">
                       Get In Touch
                     </Typography>
                     
                     <Stack spacing={1.5}>
                       {[
                         {
-                          icon: <EmailIcon sx={{ color: "#6000FF" }} />,
+                          icon: <EmailIcon sx={{ color: "primary.main" }} />,
                           title: "Email",
                           value: "olaniyikam@gmail.com",
                         },
                         {
-                          icon: <PhoneIcon sx={{ color: "#00FFFF" }} />,
+                          icon: <PhoneIcon sx={{ color: "secondary.main" }} />,
                           title: "Phone",
                           value: "+234 8124016354",
                         },
@@ -293,10 +297,10 @@ export default function Contact() {
                             {item.icon}
                           </Box>
                           <Box>
-                            <Typography variant="body2" sx={{ color: "#A0A0A0", fontSize: "0.8rem" }}>
+                            <Typography variant="body2" sx={{ color: "text.secondary", fontSize: "0.8rem" }}>
                               {item.title}
                             </Typography>
-                            <Typography variant="body1" sx={{ fontWeight: 600, fontSize: "0.85rem" }}>
+                            <Typography variant="body1" sx={{ fontWeight: 600, fontSize: "0.85rem", color: "text.primary" }}>
                               {item.value}
                             </Typography>
                           </Box>
@@ -306,7 +310,7 @@ export default function Contact() {
 
                     {/* Tech Stack */}
                     <Box mt={2}>
-                      <Typography variant="body1" sx={{ color: "white", mb: 1, fontWeight: 600 }}>
+                      <Typography variant="body1" sx={{ color: "text.primary", mb: 1, fontWeight: 600 }}>
                         Tech Stack
                       </Typography>
                       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.6 }}>
@@ -316,11 +320,13 @@ export default function Contact() {
                             label={tech}
                             size="small"
                             sx={{
-                              backgroundColor: "rgba(0,255,255,0.1)",
-                              color: "#00FFFF",
-                              border: "1px solid #00FFFF",
+                              backgroundColor: darkMode ? "rgba(40,166,231,0.1)" : "rgba(100,32,243,0.08)",
+                              color: "secondary.main",
+                              border: "1px solid",
+                              borderColor: "secondary.main",
                               fontWeight: 500,
-                              fontSize: "0.7rem"
+                              fontSize: "0.7rem",
+                              transition: "all 0.3s ease",
                             }}
                           />
                         ))}
@@ -336,14 +342,14 @@ export default function Contact() {
                       <Grid item xs={4} key={index}>
                         <Card
                           sx={{
-                            backgroundColor: "rgba(255,255,255,0.02)",
-                            border: "1px solid rgba(255,255,255,0.05)",
+                            backgroundColor: darkMode ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)",
+                            border: `1px solid ${darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}`,
                             borderRadius: "12px",
                             p: 1.5,
                             textAlign: "center",
                             transition: "all 0.3s ease",
                             "&:hover": {
-                              borderColor: "#6000FF",
+                              borderColor: "primary.main",
                               transform: "translateY(-2px)",
                             }
                           }}
@@ -352,7 +358,7 @@ export default function Contact() {
                             variant="h5"
                             sx={{
                               fontWeight: 800,
-                              color: "#6000FF",
+                              color: "primary.main",
                               mb: 0.5,
                               fontSize: "1.5rem"
                             }}
@@ -362,7 +368,7 @@ export default function Contact() {
                           <Typography
                             variant="caption"
                             sx={{
-                              color: "#A0A0A0",
+                              color: "text.secondary",
                               fontWeight: 500,
                               fontSize: "0.7rem"
                             }}
@@ -375,21 +381,23 @@ export default function Contact() {
                   </Grid>
                 </motion.div>
 
-                {/* Social Links - Text back to white */}
+                {/* Social Links */}
                 <motion.div variants={itemVariants}>
                   <Card
                     sx={{
-                      backgroundColor: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(255,255,255,0.1)",
+                      backgroundColor: "background.paper",
+                      border: "1px solid",
+                      borderColor: "divider",
                       borderRadius: "20px",
                       p: 2,
-                      width: '100%'
+                      width: '100%',
+                      transition: "all 0.3s ease",
                     }}
                   >
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: "white",
+                        color: "text.primary",
                         mb: 1.5, 
                         fontWeight: 600,
                         textAlign: "center"
@@ -407,8 +415,9 @@ export default function Contact() {
                           rel="noopener noreferrer"
                           sx={{
                             color: social.color,
-                            backgroundColor: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.1)",
+                            backgroundColor: darkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+                            border: `1px solid ${darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
+                            transition: "all 0.3s ease",
                             "&:hover": {
                               backgroundColor: social.color,
                               color: "white",
@@ -430,20 +439,21 @@ export default function Contact() {
               <motion.div variants={itemVariants}>
                 <Card
                   sx={{
-                    backgroundColor: "rgba(255,255,255,0.03)",
-                    backdropFilter: "blur(20px)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    backgroundColor: "background.paper",
+                    border: "1px solid",
+                    borderColor: "divider",
                     borderRadius: "20px",
                     p: { xs: 3, md: 4 },
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.25)",
+                    boxShadow: darkMode ? "0 20px 40px rgba(0,0,0,0.25)" : "0 20px 40px rgba(0,0,0,0.05)",
                     height: "100%",
-                    minHeight: '600px'
+                    minHeight: '600px',
+                    transition: "all 0.3s ease",
                   }}
                 >
-                  <Typography variant="h4" fontWeight={800} mb={1}>
+                  <Typography variant="h4" fontWeight={800} mb={1} color="text.primary">
                     Send Message
                   </Typography>
-                  <Typography variant="body1" sx={{ color: "#A0A0A0", mb: 3, fontSize: "0.95rem" }}>
+                  <Typography variant="body1" sx={{ color: "text.secondary", mb: 3, fontSize: "0.95rem" }}>
                     Fill out the form below and I'll get back to you within 24 hours
                   </Typography>
 
@@ -500,15 +510,15 @@ export default function Contact() {
                         variant="outlined"
                         required
                         fullWidth
-                        InputLabelProps={{ style: { color: "#A0A0A0" } }}
-                        InputProps={{ style: { color: "white" } }}
+                        InputLabelProps={{ style: { color: "text.secondary" } }}
+                        InputProps={{ style: { color: "text.primary" } }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
-                            "& fieldset": { borderColor: "rgba(255,255,255,0.2)" },
-                            "&:hover fieldset": { borderColor: "#6000FF" },
+                            "& fieldset": { borderColor: "divider" },
+                            "&:hover fieldset": { borderColor: "primary.main" },
                             "&.Mui-focused fieldset": {
-                              borderColor: "#6000FF",
-                              boxShadow: "0 0 0 2px rgba(96,0,255,0.2)",
+                              borderColor: "primary.main",
+                              boxShadow: "0 0 0 2px rgba(100,32,243,0.2)",
                             },
                           },
                         }}
@@ -522,15 +532,15 @@ export default function Contact() {
                         variant="outlined"
                         required
                         fullWidth
-                        InputLabelProps={{ style: { color: "#A0A0A0" } }}
-                        InputProps={{ style: { color: "white" } }}
+                        InputLabelProps={{ style: { color: "text.secondary" } }}
+                        InputProps={{ style: { color: "text.primary" } }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
-                            "& fieldset": { borderColor: "rgba(255,255,255,0.2)" },
-                            "&:hover fieldset": { borderColor: "#6000FF" },
+                            "& fieldset": { borderColor: "divider" },
+                            "&:hover fieldset": { borderColor: "primary.main" },
                             "&.Mui-focused fieldset": {
-                              borderColor: "#6000FF",
-                              boxShadow: "0 0 0 2px rgba(96,0,255,0.2)",
+                              borderColor: "primary.main",
+                              boxShadow: "0 0 0 2px rgba(100,32,243,0.2)",
                             },
                           },
                         }}
@@ -545,15 +555,15 @@ export default function Contact() {
                         variant="outlined"
                         required
                         fullWidth
-                        InputLabelProps={{ style: { color: "#A0A0A0" } }}
-                        InputProps={{ style: { color: "white" } }}
+                        InputLabelProps={{ style: { color: "text.secondary" } }}
+                        InputProps={{ style: { color: "text.primary" } }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
-                            "& fieldset": { borderColor: "rgba(255,255,255,0.2)" },
-                            "&:hover fieldset": { borderColor: "#6000FF" },
+                            "& fieldset": { borderColor: "divider" },
+                            "&:hover fieldset": { borderColor: "primary.main" },
                             "&.Mui-focused fieldset": {
-                              borderColor: "#6000FF",
-                              boxShadow: "0 0 0 2px rgba(96,0,255,0.2)",
+                              borderColor: "primary.main",
+                              boxShadow: "0 0 0 2px rgba(100,32,243,0.2)",
                             },
                           },
                         }}
@@ -566,20 +576,19 @@ export default function Contact() {
                         startIcon={loading ? null : <SendIcon />}
                         sx={{
                           mt: 1,
-                          backgroundColor: "#6000FF",
-                          background: "linear-gradient(45deg, #6000FF 0%, #7E3AFF 100%)",
+                          backgroundColor: "primary.main",
                           fontWeight: 700,
                           fontSize: "1rem",
                           py: 1.2,
                           borderRadius: "12px",
-                          boxShadow: "0 8px 20px rgba(96,0,255,0.3)",
+                          boxShadow: "0 8px 20px rgba(100,32,243,0.3)",
                           "&:hover": {
-                            background: "linear-gradient(45deg, #4B00CC 0%, #6B2AFF 100%)",
-                            boxShadow: "0 10px 25px rgba(96,0,255,0.5)",
+                            backgroundColor: "secondary.main",
+                            boxShadow: "0 10px 25px rgba(100,32,243,0.5)",
                             transform: "translateY(-2px)",
                           },
                           "&:disabled": {
-                            background: "rgba(96,0,255,0.3)",
+                            backgroundColor: "rgba(100,32,243,0.3)",
                             transform: "none",
                             boxShadow: "none",
                           }

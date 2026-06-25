@@ -1,5 +1,4 @@
-// src/Components/navBar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,39 +13,29 @@ import {
   Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Sun, Moon } from "@phosphor-icons/react";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { styled } from "@mui/system";
 import { Link, useLocation } from "react-router-dom";
-
-// Clean AppBar that touches sides
-const GlassAppBar = styled(AppBar)(({ theme }) => ({
-  background: theme.palette.mode === 'dark' 
-    ? "rgba(10, 17, 40, 0.9)" 
-    : "rgba(245, 245, 247, 0.9)",
-  backdropFilter: "blur(20px)",
-  borderBottom: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
-  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-}));
-
-// Navigation link styles - simplified
-const NavLink = styled(Typography)(({ theme }) => ({
-  marginLeft: theme.spacing(4),
-  fontSize: "1rem",
-  fontWeight: 500,
-  color: theme.palette.text.secondary,
-  cursor: "pointer",
-  textDecoration: "none",
-  transition: "color 0.3s ease-in-out",
-  
-  "&:hover": {
-    color: theme.palette.text.primary,
-  },
-}));
+import { useTheme } from "../themes/theme";
 
 export default function NavBar() {
   const isMobile = useMediaQuery("(max-width:768px)");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { darkMode, toggleDarkMode } = useTheme();
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrolled]);
 
   const navItems = [
     { label: "Home", to: "/" },
@@ -54,95 +43,234 @@ export default function NavBar() {
     { label: "About", to: "/about" },
   ];
 
+  // Theme-based colors
+  const colors = {
+    // Logo text - Always purple
+    logoColor: "#6420F3",
+    
+    // Nav links
+    navLinkColor: !scrolled 
+      ? (darkMode ? "#FFFFFF" : "#000000")
+      : (darkMode ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"),
+    navLinkHoverColor: darkMode ? "#FFFFFF" : "#000000",
+    navLinkActiveColor: darkMode ? "#FFFFFF" : "#000000",
+    
+    // Menu button
+    menuButtonColor: !scrolled 
+      ? (darkMode ? "#FFFFFF" : "#000000")
+      : (darkMode ? "#FFFFFF" : "#000000"),
+    
+    // Theme toggle
+    themeToggleColor: !scrolled 
+      ? (darkMode ? "#FFFFFF" : "#000000")
+      : (darkMode ? "#FFD700" : "#000000"),
+    
+    // Let's Talk button - Always purple
+    talkButtonBg: !scrolled ? "#6420F3" : "transparent",
+    talkButtonText: !scrolled ? "#FFFFFF" : "#6420F3",
+    talkButtonBorder: "#6420F3",
+    talkButtonHoverBg: !scrolled ? "#4B00CC" : "rgba(100,32,243,0.1)",
+    
+    // Arrow icon
+    arrowBg: scrolled 
+      ? "#6420F3"
+      : "#FFFFFF",
+    arrowColor: scrolled 
+      ? "#FFFFFF"
+      : "#6420F3",
+    
+    // AppBar background
+    appBarBg: scrolled 
+      ? (darkMode ? "rgba(10,10,10,0.85)" : "rgba(255,255,255,0.85)")
+      : "transparent",
+    
+    // Border - White outline for dark mode when scrolled
+    borderColor: scrolled 
+      ? (darkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)")
+      : "transparent",
+    
+    // Box shadow
+    boxShadow: scrolled 
+      ? (darkMode ? "0 0 20px rgba(255,255,255,0.1)" : "0 0 20px rgba(100,32,243,0.15)")
+      : "none",
+    
+    // Drawer
+    drawerBg: darkMode ? "rgba(10,10,10,0.95)" : "rgba(255,255,255,0.95)",
+    drawerText: darkMode ? "#FFFFFF" : "#000000",
+    drawerHoverBg: darkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
+  };
+
   return (
     <>
-      {/* Add Google Fonts link to head */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-      <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+      <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet" />
       
-      <GlassAppBar position="fixed" elevation={0}>
+      <AppBar 
+        position="fixed" 
+        elevation={0}
+        sx={{
+          width: scrolled ? "90%" : "92%",
+          left: scrolled ? "5%" : "4%",
+          right: scrolled ? "5%" : "4%",
+          top: scrolled ? "10px" : "20px",
+          borderRadius: scrolled ? "50px" : "40px",
+          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+          background: colors.appBarBg,
+          backdropFilter: scrolled ? "blur(10px)" : "blur(0)",
+          border: scrolled ? "1px solid" : "none",
+          borderColor: colors.borderColor,
+          boxShadow: colors.boxShadow,
+          "&:hover": scrolled ? {
+            boxShadow: darkMode 
+              ? "0 0 30px rgba(255,255,255,0.2)"
+              : "0 0 30px rgba(100,32,243,0.25)",
+            borderColor: darkMode ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.2)",
+          } : {},
+        }}
+      >
         <Toolbar sx={{ 
           display: "flex", 
           justifyContent: "space-between",
-          px: { xs: 2, md: 4 }
+          px: { xs: 2, md: 4 },
+          minHeight: scrolled ? "64px" : "80px",
+          transition: "min-height 0.4s ease",
         }}>
-          {/* Name - Moved closer to center */}
+          {/* Name - Left Side - Purple Logo */}
           <Box 
             component={Link}
             to="/"
             sx={{ 
-              display: "flex", 
-              alignItems: "center", 
               textDecoration: "none",
               cursor: "pointer",
-              marginLeft: { md: "100px" }
+              transition: "transform 0.3s ease",
+              "&:hover": {
+                transform: "scale(1.05)",
+              }
             }}
           >
             <Typography
-              variant="h5"
+              variant="h6"
               sx={{
-                fontFamily: "'Great Vibes', cursive",
+                fontFamily: "'Azonix', sans-serif",
                 fontWeight: 400,
-                color: "text.primary",
-                fontSize: { xs: "1.8rem", md: "2rem" },
+                letterSpacing: "2px",
+                color: colors.logoColor,
+                fontSize: scrolled ? "1.3rem" : "1.5rem",
+                transition: "all 0.3s ease",
               }}
             >
-              Olaniyi 
+              Olaniyi
             </Typography>
           </Box>
 
           {/* Desktop Menu - Centered */}
           {!isMobile && (
-            <Box sx={{ display: "flex", alignItems: "center", flex: 1, justifyContent: "center" }}>
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  component={Link}
-                  to={item.to}
-                >
-                  {item.label}
-                </NavLink>
-              ))}
+            <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.to;
+                return (
+                  <Typography
+                    key={item.to}
+                    component={Link}
+                    to={item.to}
+                    sx={{
+                      fontSize: "1rem",
+                      fontWeight: isActive ? 700 : 500,
+                      color: isActive ? colors.navLinkActiveColor : colors.navLinkColor,
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      position: "relative",
+                      transition: "color 0.3s ease",
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: -8,
+                        left: "50%",
+                        width: isActive ? "100%" : 0,
+                        height: "2px",
+                        background: "linear-gradient(90deg, #6420F3, #28a6e7)",
+                        transition: "all 0.3s ease",
+                        transform: "translateX(-50%)",
+                        borderRadius: "2px",
+                      },
+                      "&:hover": {
+                        color: colors.navLinkHoverColor,
+                      },
+                      "&:hover::after": {
+                        width: "100%",
+                      },
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                );
+              })}
             </Box>
           )}
 
-          {/* Right Side - LET'S TALK Button only */}
+          {/* Right Side - Theme Toggle + LET'S TALK Button */}
           {!isMobile && (
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
-              {/* LET'S TALK Button with Arrow */}
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              {/* Theme Toggle */}
+              <IconButton
+                onClick={toggleDarkMode}
+                sx={{
+                  color: colors.themeToggleColor,
+                  backgroundColor: !scrolled ? "transparent" : "rgba(0,0,0,0.05)",
+                  borderRadius: "50%",
+                  width: "40px",
+                  height: "40px",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                    transform: "rotate(15deg)",
+                  },
+                }}
+              >
+                {darkMode ? <Sun size={22} weight="fill" /> : <Moon size={22} weight="fill" />}
+              </IconButton>
+
+              {/* LET'S TALK Button - Purple */}
               <Button
                 component={Link}
                 to="/contact"
-                variant="outlined"
+                variant={scrolled ? "outlined" : "contained"}
                 endIcon={
                   <Box
                     sx={{
-                      backgroundColor: "primary.main",
+                      backgroundColor: colors.arrowBg,
                       borderRadius: "50%",
-                      width: "32px",
-                      height: "32px",
+                      width: "28px",
+                      height: "28px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transform: "rotate(45deg)",
+                      transition: "transform 0.3s ease",
                     }}
                   >
-                    <ArrowUpwardIcon sx={{ fontSize: "20px", color: "white" }} />
+                    <ArrowUpwardIcon sx={{ fontSize: "16px", color: colors.arrowColor }} />
                   </Box>
                 }
                 sx={{
-                  color: "text.primary",
-                  borderColor: "primary.main",
-                  borderRadius: "25px",
-                  px: 2,
-                  py: 1,
-                  fontWeight: 500,
-                  minWidth: "auto",
+                  backgroundColor: !scrolled ? "#6420F3" : "transparent",
+                  color: !scrolled ? "#FFFFFF" : "#6420F3",
+                  borderColor: "#6420F3",
+                  borderRadius: "30px",
+                  px: 2.5,
+                  py: 0.8,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  transition: "all 0.3s ease",
                   "&:hover": {
-                    borderColor: "primary.light",
-                    backgroundColor: "rgba(126, 58, 255, 0.1)",
-                  }
+                    backgroundColor: scrolled ? "rgba(100,32,243,0.1)" : "#4B00CC",
+                    transform: "translateY(-2px)",
+                    "& .MuiBox-root": {
+                      transform: "rotate(90deg)",
+                    },
+                  },
                 }}
               >
                 LET'S TALK
@@ -154,7 +282,10 @@ export default function NavBar() {
           {isMobile && (
             <IconButton
               onClick={() => setDrawerOpen(true)}
-              sx={{ color: "text.primary" }}
+              sx={{ 
+                color: colors.menuButtonColor,
+                transition: "color 0.3s ease",
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -168,57 +299,76 @@ export default function NavBar() {
           onClose={() => setDrawerOpen(false)}
           PaperProps={{
             sx: {
-              background: (theme) => theme.palette.mode === 'dark' 
-                ? "rgba(10, 17, 40, 0.95)" 
-                : "rgba(245, 245, 247, 0.95)",
+              background: colors.drawerBg,
               backdropFilter: "blur(20px)",
               width: 280,
+              borderLeft: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
             },
           }}
         >
-          <Box sx={{ p: 2 }}>
+          <Box sx={{ p: 3 }}>
             <Typography 
               variant="h6" 
               sx={{ 
-                color: "text.primary", 
+                color: colors.drawerText, 
                 textAlign: "center", 
-                mb: 3,
-                fontWeight: 600 
+                mb: 4,
+                fontWeight: 600,
+                fontFamily: "'Azonix', sans-serif",
+                letterSpacing: "2px",
               }}
             >
-              Navigation
+              Olaniyi
             </Typography>
             <List>
-              {navItems.map((item) => (
-                <ListItem
-                  key={item.to}
-                  component={Link}
-                  to={item.to}
-                  onClick={() => setDrawerOpen(false)}
-                  sx={{
-                    borderRadius: "8px",
-                    mb: 1,
-                    color: "text.secondary",
-                    "&:hover": {
-                      color: "text.primary",
-                    }
-                  }}
-                >
-                  <ListItemText primary={item.label} />
-                </ListItem>
-              ))}
-              {/* Mobile Contact Item */}
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.to;
+                return (
+                  <ListItem
+                    key={item.to}
+                    component={Link}
+                    to={item.to}
+                    onClick={() => setDrawerOpen(false)}
+                    sx={{
+                      borderRadius: "12px",
+                      mb: 1.5,
+                      color: isActive ? "#6420F3" : colors.drawerText,
+                      backgroundColor: isActive ? "rgba(100,32,243,0.1)" : "transparent",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        backgroundColor: colors.drawerHoverBg,
+                        transform: "translateX(5px)",
+                      },
+                    }}
+                  >
+                    <ListItemText 
+                      primary={item.label} 
+                      primaryTypographyProps={{
+                        fontWeight: isActive ? 600 : 500,
+                        textAlign: "center",
+                      }}
+                    />
+                  </ListItem>
+                );
+              })}
               <ListItem
                 component={Link}
                 to="/contact"
                 onClick={() => setDrawerOpen(false)}
                 sx={{
-                  borderRadius: "8px",
-                  mb: 1,
-                  color: "text.secondary",
+                  borderRadius: "12px",
+                  mt: 2,
+                  color: colors.drawerText,
+                  textAlign: "center",
+                  justifyContent: "center",
+                  border: "1px solid",
+                  borderColor: "#6420F3",
                   "&:hover": {
-                    color: "text.primary",
-                  }
+                    backgroundColor: colors.drawerHoverBg,
+                    transform: "translateX(5px)",
+                  },
                 }}
               >
                 <ListItemText primary="Contact" />
@@ -226,7 +376,7 @@ export default function NavBar() {
             </List>
           </Box>
         </Drawer>
-      </GlassAppBar>
+      </AppBar>
     </>
   );
 }

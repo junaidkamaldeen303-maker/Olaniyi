@@ -1,239 +1,560 @@
-import React from "react";
-import { Box, Typography, Button, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, { useRef } from "react";
+import {
+  Box,
+  Typography,
+  Chip,
+  Card,
+} from "@mui/material";
+import { motion } from "framer-motion";
+import { useTheme as useCustomTheme } from "../themes/theme";
+import Marquee from "react-fast-marquee";
+import {
+  Code,
+  Storage,
+  AutoAwesome,
+  Palette,
+} from "@mui/icons-material";
+
+// Import tech stack logos
+import gitLogo from "../assets/git.png";
+import githubLogo from "../assets/github.png";
+import reactLogo from "../assets/reactjs.svg";
+import nextjsLogo from "../assets/nextjs.png";
+import typescriptLogo from "../assets/typescript.png";
+import tailwindLogo from "../assets/tailwindcss.png";
+import framerLogo from "../assets/framer.png";
+import threejsLogo from "../assets/threejs.png";
+import vercelLogo from "../assets/Vercel.png";
+import firebaseLogo from "../assets/firebase.png";
+import javaLogo from "../assets/java.png";
+import springbootLogo from "../assets/springboot.png";
+import nodejsLogo from "../assets/nodejs.svg";
+import mongodbLogo from "../assets/mongodb.png";
+import figmaLogo from "../assets/figma.svg";
+import photoshopLogo from "../assets/Adobe Photoshop.png";
+import bootstrapLogo from "../assets/bootstrap.svg";
+import javascriptLogo from "../assets/javascript.svg";
+import webflowLogo from "../assets/webflow.png";
+import wixLogo from "../assets/Wix Studio.png";
+import wordpressLogo from "../assets/wordpress.png";
+
+const skillsData = [
+  {
+    id: "frontend",
+    title: "Frontend",
+    icon: <Code />,
+    accentColor: "#8B5CF6",
+    description: "Building responsive and interactive web interfaces using modern frontend frameworks, animation libraries, and scalable component architectures.",
+    technologies: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Material UI", "Bootstrap", "Framer Motion"],
+  },
+  {
+    id: "backend",
+    title: "Backend",
+    icon: <Storage />,
+    accentColor: "#22D3EE",
+    description: "Designing secure, scalable backend systems, RESTful APIs, authentication services, databases, and cloud-powered infrastructure.",
+    technologies: ["Java", "Spring Boot", "Node.js", "NestJS", "REST APIs", "Authentication", "Firebase"],
+  },
+  {
+    id: "vibeCoding",
+    title: "Vibe Coding",
+    icon: <AutoAwesome />,
+    accentColor: "#F472B6",
+    description: "Accelerating software delivery using AI-assisted development platforms for rapid prototyping, interface generation, debugging, and full-stack application development.",
+    technologies: ["Bolt.new", "Lovable", "Replit", "v0", "Cursor AI", "DeepSeek", "Claude"],
+  },
+  {
+    id: "websiteDesign",
+    title: "Website Design",
+    icon: <Palette />,
+    accentColor: "#FBBF24",
+    description: "Crafting visually stunning and user-centric website designs that blend creativity with functionality for memorable digital experiences.",
+    technologies: ["Figma", "Framer", "Three.js", "Webflow", "Wix Studio", "WordPress", "Adobe Photoshop"],
+  },
+];
+
+// Tech stack logos for carousel
+const techLogos = [
+  { name: "Git", logo: gitLogo },
+  { name: "GitHub", logo: githubLogo },
+  { name: "React", logo: reactLogo },
+  { name: "Next.js", logo: nextjsLogo },
+  { name: "JavaScript", logo: javascriptLogo },
+  { name: "TypeScript", logo: typescriptLogo },
+  { name: "Tailwind CSS", logo: tailwindLogo },
+  { name: "Bootstrap", logo: bootstrapLogo },
+  { name: "Framer Motion", logo: framerLogo },
+  { name: "Three.js", logo: threejsLogo },
+  { name: "Vercel", logo: vercelLogo },
+  { name: "Firebase", logo: firebaseLogo },
+  { name: "Java", logo: javaLogo },
+  { name: "Spring Boot", logo: springbootLogo },
+  { name: "Node.js", logo: nodejsLogo },
+  { name: "MongoDB", logo: mongodbLogo },
+  { name: "Figma", logo: figmaLogo },
+  { name: "Webflow", logo: webflowLogo },
+  { name: "Wix Studio", logo: wixLogo },
+  { name: "WordPress", logo: wordpressLogo },
+  { name: "Adobe Photoshop", logo: photoshopLogo },
+];
 
 export default function SkillsSection() {
+  const { darkMode } = useCustomTheme();
+  const sectionRef = useRef(null);
 
-  const navigate = useNavigate();
+  const colors = {
+    background: darkMode ? "#000000" : "#FFFFFF",
+    cardBg: darkMode ? "rgba(18,18,30,0.9)" : "rgba(255,255,255,0.9)",
+    cardBorder: darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+    primaryText: darkMode ? "#FFFFFF" : "#0A1022",
+    secondaryText: darkMode ? "rgba(255,255,255,0.60)" : "rgba(0,0,0,0.55)",
+    tertiaryText: darkMode ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+    badgeBg: darkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+    badgeBorder: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
+    badgeText: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)",
+    techBadgeBg: darkMode ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
+    techBadgeBorder: darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+    skillBadgeBg: darkMode ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+    skillBadgeBorder: darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+    glowColor: darkMode ? "rgba(74,155,255,0.06)" : "rgba(74,155,255,0.03)",
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        delay: i * 0.1,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    }),
+  };
+
+  const techStripVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        delay: 0.3,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
+  };
 
   return (
     <Box
+      ref={sectionRef}
       sx={{
-        backgroundColor: "#000B20",
-        color: "white",
-        py: { xs: 10, md: 14 },
-        px: { xs: 3, md: 14 },
-        borderTop: "1px solid rgba(255,255,255,0.1)", // ✅ subtle line at top
+        position: "relative",
+        width: "100%",
+        backgroundColor: colors.background,
+        py: { xs: "60px", sm: "80px", md: "120px", lg: "140px" },
+        px: { xs: 2, sm: 5, md: 8, lg: 10 },
+        overflow: "hidden",
+        transition: "background-color 0.3s ease",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      {/* Header Section */}
+      {/* Background Effects */}
       <Box
         sx={{
-          textAlign: { xs: "center", md: "left" },
-          maxWidth: "1300px",
-          mx: "auto",
-          mb: 8,
+          position: "absolute",
+          top: "10%",
+          right: "5%",
+          width: "400px",
+          height: "400px",
+          background: `radial-gradient(circle, ${colors.glowColor} 0%, transparent 70%)`,
+          filter: "blur(80px)",
+          pointerEvents: "none",
+          transition: "background 0.3s ease",
         }}
-      >
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 700,
-            mb: 1.5,
-            fontSize: { xs: "1.8rem", md: "2.3rem" },
-          }}
-        >
-          Building Digital Experiences
-        </Typography>
+      />
 
-        <Typography
-          variant="body1"
-          sx={{
-            fontWeight: 400,
-            color: "rgba(255,255,255,0.8)",
-            maxWidth: "650px",
-            fontSize: { xs: "1rem", md: "1.1rem" },
-          }}
-        >
-          I specialize in creating stunning user interfaces and developing
-          high-quality applications that stand out.
-        </Typography>
-      </Box>
-
-      {/* Boxes Section */}
-      <Grid
-        container
-        spacing={4}
-        justifyContent="space-between"
-        alignItems="stretch"
+      <Box
         sx={{
-          maxWidth: "1300px",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+          pointerEvents: "none",
+          opacity: 0.3,
+        }}
+      />
+
+      {/* Main Content */}
+      <Box
+        sx={{
+          maxWidth: "1440px",
+          width: "100%",
+          position: "relative",
+          zIndex: 2,
           mx: "auto",
-          mb: 6,
-          flexWrap: { xs: "wrap", md: "nowrap" }, // ✅ stay side-by-side on desktop
         }}
       >
-        {[
-          {
-            emoji: "💡",
-            title: "What I Can Do",
-            subtitle:
-              "I can help develop solutions that will grow your business.",
-            content: [
-              "UI/UX Design",
-              "Fullstack Development",
-              "Mobile App Development",
-              "Database Design",
-              "API Integration",
-            ],
-          },
-          {
-            emoji: "🧰",
-            title: "Tools I Use",
-            subtitle:
-              "I use the latest tools and technologies to build functional and scalable products.",
-            sections: [
-              {
-                label: "Frontend:",
-                items: "HTML/CSS, React, JavaScript, TypeScript...",
-              },
-              { label: "Backend:", items: "Node.js, Python, OAuth..." },
-              { label: "Design:", items: "Figma, Framer, Photoshop..." },
-            ],
-          },
-          {
-            emoji: "🎨",
-            title: "UI/UX Design",
-            subtitle:
-              "I'm a designer first, developer second. I can help design modern and engaging interfaces.",
-            content: [
-              "User-centered Design",
-              "Modern & Clean UI",
-              "Responsive Layouts",
-              "Wireframe & Prototype",
-            ],
-          },
-        ].map((box, index) => (
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={4}
-            key={index}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
+        {/* Left Aligned Header Content */}
+        <Box sx={{ mb: { xs: "40px", sm: "50px", md: "60px" } }}>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ marginBottom: "20px" }}
           >
             <Box
               sx={{
-                background: "rgba(255,255,255,0.05)",
-                borderRadius: "20px",
-                p: { xs: 2, md: 2.5 },
-                textAlign: "left",
-                backdropFilter: "blur(8px)",
-                width: "100%",
-                maxWidth: "390px",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
-                },
+                display: "inline-block",
+                backgroundColor: colors.badgeBg,
+                border: `1px solid ${colors.badgeBorder}`,
+                borderRadius: "999px",
+                padding: "8px 18px",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+                transition: "all 0.3s ease",
               }}
             >
-              {/* Header with purple emoji */}
               <Typography
-                variant="h6"
+                variant="caption"
                 sx={{
-                  fontWeight: 700,
-                  mb: 0.8,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  color: colors.badgeText,
                 }}
               >
-                <span style={{ color: "#6000FF", fontSize: "1.6rem" }}>
-                  {box.emoji}
-                </span>
-                {box.title}
+                SKILLS
               </Typography>
-
-              {/* Subheader */}
-              <Typography
-                variant="body2"
-                sx={{
-                  mb: 1,
-                  color: "rgba(255,255,255,0.8)",
-                  fontSize: "0.88rem",
-                }}
-              >
-                {box.subtitle}
-              </Typography>
-
-              {/* Content */}
-              <Box sx={{ flexGrow: 1 }}>
-                {box.content && (
-                  <ul
-                    style={{
-                      paddingLeft: "1.1rem",
-                      margin: 0,
-                      lineHeight: 1.5,
-                      listStyleType: "disc",
-                      fontSize: "0.88rem",
-                    }}
-                  >
-                    {box.content.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-
-                {box.sections &&
-                  box.sections.map((section, i) => (
-                    <Box key={i} sx={{ mb: 0.3 }}>
-                      <Typography
-                        variant="body2"
-                        sx={{ fontWeight: 600, fontSize: "0.88rem" }}
-                      >
-                        {section.label}
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontSize: "0.88rem" }}>
-                        {section.items}
-                      </Typography>
-                    </Box>
-                  ))}
-              </Box>
             </Box>
-          </Grid>
-        ))}
-      </Grid>
+          </motion.div>
 
-      {/* Bottom Button - Aligned with Last Box */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: { xs: "center", md: "flex-end" },
-          maxWidth: "1300px",
-          mx: "auto",
-          pr: { xs: 0, md: 0 }, // ✅ remove extra padding so it aligns with box grid
-        }}
-      >
-   <Button
-          variant="outlined"
-          onClick={() => navigate('/projects')}
-          sx={{
-            borderColor: "#6000FF",
-            color: "#6000FF",
-            fontWeight: 600,
-            textTransform: "none",
-            fontSize: "0.9rem",
-            borderRadius: "10px",
-            px: 3,
-            py: 0.8,
-            "&:hover": {
-              borderColor: "#7E3AFF",
-              color: "#7E3AFF",
-              backgroundColor: "rgba(126,58,255,0.08)",
-              boxShadow: "0 0 10px rgba(126,58,255,0.4)",
-            },
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ marginBottom: "12px" }}
+          >
+            <Typography
+              variant="h1"
+              sx={{
+                fontFamily: "'Playfair Display', 'Cormorant Garamond', serif",
+                fontSize: { xs: "2.5rem", sm: "3.2rem", md: "4rem", lg: "5rem", xl: "5.5rem" },
+                fontWeight: 600,
+                letterSpacing: "-1px",
+                color: colors.primaryText,
+                lineHeight: 1.1,
+                transition: "color 0.3s ease",
+                textAlign: "left",
+              }}
+            >
+              My Technical Skills<span style={{ color: "#4A9BFF" }}>.</span>
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                maxWidth: "700px",
+                fontSize: { xs: "16px", sm: "17px", md: "18px" },
+                fontWeight: 400,
+                lineHeight: 1.8,
+                color: colors.secondaryText,
+                transition: "color 0.3s ease",
+                textAlign: "left",
+              }}
+            >
+              I build complete digital products—from intuitive user interfaces and scalable backend systems to AI-powered workflows, cloud deployment, and modern development automation.
+            </Typography>
+          </motion.div>
+        </Box>
+
+        {/* Technology Showcase Marquee - No Pause on Hover */}
+        <motion.div
+          variants={techStripVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          style={{
+            marginBottom: { xs: "40px", sm: "50px", md: "60px" },
+            width: "100%",
+            overflow: "hidden",
           }}
         >
-          View Projects
-        </Button>
+          <Box
+            sx={{
+              width: "100%",
+              py: "8px",
+            }}
+          >
+            <Marquee
+              gradient={true}
+              gradientColor={darkMode ? [0, 0, 0] : [255, 255, 255]}
+              speed={50}
+              pauseOnHover={false}
+              loop={0}
+            >
+              {techLogos.map((tech, index) => (
+                <Box
+                  key={`${tech.name}-${index}`}
+                  sx={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "14px 24px",
+                    marginRight: "16px",
+                    backgroundColor: colors.techBadgeBg,
+                    border: `1px solid ${colors.techBadgeBorder}`,
+                    borderRadius: "16px",
+                    cursor: "default",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={tech.logo}
+                    alt={tech.name}
+                    sx={{
+                      width: "28px",
+                      height: "28px",
+                      objectFit: "contain",
+                      filter: darkMode 
+                        ? "brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.1))" 
+                        : "brightness(0.9) drop-shadow(0 0 2px rgba(0,0,0,0.05))",
+                      ...(tech.name === "GitHub" && {
+                        filter: darkMode ? "brightness(0) invert(1)" : "brightness(1)",
+                      }),
+                      ...(tech.name === "Vercel" && {
+                        filter: darkMode ? "brightness(0) invert(1)" : "brightness(1)",
+                      }),
+                      ...(tech.name === "Three.js" && {
+                        filter: darkMode ? "brightness(1)" : "brightness(0.8)",
+                      }),
+                      ...(tech.name === "Framer Motion" && {
+                        filter: darkMode ? "brightness(1)" : "brightness(0.8)",
+                      }),
+                      ...(tech.name === "Bootstrap" && {
+                        filter: darkMode ? "brightness(1)" : "brightness(0.8)",
+                      }),
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      color: colors.tertiaryText,
+                      transition: "color 0.3s ease",
+                    }}
+                  >
+                    {tech.name}
+                  </Typography>
+                </Box>
+              ))}
+            </Marquee>
+          </Box>
+        </motion.div>
+
+        {/* Skills Grid - Simple flexbox 2x2 */}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: { xs: 2.5, sm: 3, md: 3, lg: 4 },
+            maxWidth: "1440px",
+            mx: "auto",
+          }}
+        >
+          {skillsData.map((skill, index) => (
+            <Box
+              key={skill.id}
+              sx={{
+                flex: { xs: "0 0 100%", sm: "0 0 calc(50% - 16px)", md: "0 0 calc(50% - 16px)", lg: "0 0 calc(50% - 20px)" },
+                maxWidth: { xs: "100%", sm: "calc(50% - 16px)", md: "calc(50% - 16px)", lg: "calc(50% - 20px)" },
+                display: "flex",
+                alignItems: "stretch",
+              }}
+            >
+              <motion.div
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Card
+                  sx={{
+                    height: "100%",
+                    minHeight: {
+                      xs: "300px",
+                      sm: "320px",
+                      md: "340px",
+                      lg: "360px",
+                      xl: "380px",
+                    },
+                    maxHeight: {
+                      xs: "auto",
+                      sm: "auto",
+                      md: "auto",
+                      lg: "420px",
+                    },
+                    backgroundColor: colors.cardBg,
+                    border: `1px solid ${colors.cardBorder}`,
+                    borderRadius: "24px",
+                    padding: {
+                      xs: "24px",
+                      sm: "28px",
+                      md: "28px",
+                      lg: "32px",
+                    },
+                    boxShadow: darkMode
+                      ? "0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.02)"
+                      : "0 4px 20px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  {/* Category Header - Icon + Title */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      mb: "20px",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: { xs: "44px", sm: "48px", md: "48px", lg: "48px" },
+                        height: { xs: "44px", sm: "48px", md: "48px", lg: "48px" },
+                        borderRadius: "14px",
+                        backgroundColor: `${skill.accentColor}15`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: skill.accentColor,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {skill.icon}
+                    </Box>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontSize: {
+                          xs: "1.1rem",
+                          sm: "1.2rem",
+                          md: "1.3rem",
+                          lg: "1.5rem",
+                        },
+                        fontWeight: 700,
+                        color: colors.primaryText,
+                      }}
+                    >
+                      {skill.title}
+                    </Typography>
+                  </Box>
+
+                  {/* Description */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: {
+                        xs: "13px",
+                        sm: "13px",
+                        md: "14px",
+                        lg: "15px",
+                      },
+                      lineHeight: 1.6,
+                      color: colors.secondaryText,
+                      mb: "24px",
+                      flex: 1,
+                      maxWidth: {
+                        xs: "100%",
+                        sm: "95%",
+                        md: "95%",
+                        lg: "90%",
+                      },
+                    }}
+                  >
+                    {skill.description}
+                  </Typography>
+
+                  {/* Technology Badges */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "10px",
+                      mt: "auto",
+                    }}
+                  >
+                    {skill.technologies.map((tech) => (
+                      <Chip
+                        key={tech}
+                        label={tech}
+                        sx={{
+                          height: "auto",
+                          padding: "6px 14px",
+                          backgroundColor: colors.skillBadgeBg,
+                          border: `1px solid ${colors.skillBadgeBorder}`,
+                          borderRadius: "8px",
+                          cursor: "default",
+                          "& .MuiChip-label": {
+                            fontSize: {
+                              xs: "12px",
+                              sm: "12px",
+                              md: "13px",
+                              lg: "13px",
+                            },
+                            fontWeight: 500,
+                            padding: 0,
+                            color: colors.tertiaryText,
+                          },
+                        }}
+                      />
+                    ))}
+                  </Box>
+                </Card>
+              </motion.div>
+            </Box>
+          ))}
+        </Box>
       </Box>
     </Box>
   );

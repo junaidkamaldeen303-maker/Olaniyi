@@ -1,35 +1,49 @@
-import React, { useRef } from "react";
-import { Box, Typography, TextField, Button, Snackbar, Alert } from "@mui/material";
+import React, { useRef, useState } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import backgroundImage from "../assets/yap.jpg";
 import emailjs from '@emailjs/browser';
+import { useTheme } from "../themes/theme";
 
 export default function ContactSection() {
+  const { darkMode } = useTheme();
   const formRef = useRef();
-  const [loading, setLoading] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs.sendForm(
-      'service_85w6uq9',
-      'template_xpgcq4j',
-      formRef.current,
-      '6sH152jShzxL-WZpG'
-    )
-    .then(() => {
-      setSuccess(true);
-      setLoading(false);
-      formRef.current.reset();
-    })
-    .catch(() => {
-      setLoading(false);
-    });
+    emailjs
+      .sendForm(
+        'service_85w6uq9',
+        'template_xpgcq4j',
+        formRef.current,
+        '6sH152jShzxL-WZpG'
+      )
+      .then(() => {
+        setSuccess(true);
+        setLoading(false);
+        formRef.current.reset();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   return (
-    <Box sx={{ p: { xs: 2, md: 10 }, backgroundColor: "#070a2f" }}>
+    <Box sx={{ 
+      p: { xs: 2, md: 10 }, 
+      backgroundColor: "background.default",
+      transition: "background-color 0.3s ease",
+    }}>
       <Box
         sx={{
           position: "relative",
@@ -37,7 +51,7 @@ export default function ContactSection() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          color: "white",
+          color: "text.primary",
           py: { xs: 10, md: 14 },
           px: { xs: 3, md: 10 },
           display: "flex",
@@ -45,23 +59,25 @@ export default function ContactSection() {
           justifyContent: "center",
           minHeight: "90vh",
           borderRadius: "12px",
-          border: "1px solid rgba(255,255,255,0.4)",
+          border: "1px solid",
+          borderColor: "divider",
         }}
       >
-        {/* Overlay */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(to bottom right, rgba(7,10,47,0.85), rgba(7,10,47,0.7))",
-            zIndex: 1,
-            borderRadius: "12px",
-          }}
-        />
+        {/* Overlay - Only for dark mode */}
+        {darkMode && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "linear-gradient(to bottom right, rgba(0,0,0,0.75), rgba(0,0,0,0.6))",
+              zIndex: 1,
+              borderRadius: "12px",
+            }}
+          />
+        )}
 
         {/* Content */}
         <Box
@@ -108,7 +124,7 @@ export default function ContactSection() {
               variant="body1"
               sx={{
                 fontWeight: 400,
-                color: "rgba(255,255,255,0.85)",
+                color: "#FFFFFF",
                 fontSize: { xs: "1rem", md: "1.1rem" },
                 maxWidth: "480px",
               }}
@@ -124,7 +140,9 @@ export default function ContactSection() {
             onSubmit={handleSubmit}
             sx={{
               flex: 1,
-              background: "rgba(255, 255, 255, 0.08)",
+              background: darkMode 
+                ? "rgba(255,255,255,0.08)" 
+                : "rgba(255,255,255,0.85)",
               backdropFilter: "blur(10px)",
               borderRadius: "16px",
               p: { xs: 2, md: 3 },
@@ -133,6 +151,8 @@ export default function ContactSection() {
               gap: 2.5,
               maxWidth: "380px",
               mx: { xs: "auto", md: 0 },
+              border: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.3)"}`,
+              transition: "all 0.3s ease",
             }}
           >
             <TextField
@@ -140,14 +160,25 @@ export default function ContactSection() {
               label="Full Name"
               variant="outlined"
               fullWidth
-              InputLabelProps={{ style: { color: "rgba(255,255,255,0.7)" } }}
+              InputLabelProps={{ 
+                style: { 
+                  color: darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" 
+                } 
+              }}
               InputProps={{
                 style: {
-                  color: "#fff",
+                  color: darkMode ? "#FFFFFF" : "#000000",
                   borderRadius: "12px",
-                  background: "rgba(255,255,255,0.08)",
-                  fontSize: "0.9rem",
                 },
+                sx: {
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { 
+                      borderColor: darkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)" 
+                    },
+                    '&:hover fieldset': { borderColor: '#6420F3' },
+                    '&.Mui-focused fieldset': { borderColor: '#6420F3' },
+                  },
+                }
               }}
             />
 
@@ -156,14 +187,25 @@ export default function ContactSection() {
               label="Email Address"
               variant="outlined"
               fullWidth
-              InputLabelProps={{ style: { color: "rgba(255,255,255,0.7)" } }}
+              InputLabelProps={{ 
+                style: { 
+                  color: darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" 
+                } 
+              }}
               InputProps={{
                 style: {
-                  color: "#fff",
+                  color: darkMode ? "#FFFFFF" : "#000000",
                   borderRadius: "12px",
-                  background: "rgba(255,255,255,0.08)",
-                  fontSize: "0.9rem",
                 },
+                sx: {
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { 
+                      borderColor: darkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)" 
+                    },
+                    '&:hover fieldset': { borderColor: '#6420F3' },
+                    '&.Mui-focused fieldset': { borderColor: '#6420F3' },
+                  },
+                }
               }}
             />
 
@@ -174,14 +216,25 @@ export default function ContactSection() {
               multiline
               rows={4}
               fullWidth
-              InputLabelProps={{ style: { color: "rgba(255,255,255,0.7)" } }}
+              InputLabelProps={{ 
+                style: { 
+                  color: darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" 
+                } 
+              }}
               InputProps={{
                 style: {
-                  color: "#fff",
+                  color: darkMode ? "#FFFFFF" : "#000000",
                   borderRadius: "12px",
-                  background: "rgba(255,255,255,0.08)",
-                  fontSize: "0.9rem",
                 },
+                sx: {
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { 
+                      borderColor: darkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)" 
+                    },
+                    '&:hover fieldset': { borderColor: '#6420F3' },
+                    '&.Mui-focused fieldset': { borderColor: '#6420F3' },
+                  },
+                }
               }}
             />
 
@@ -192,8 +245,8 @@ export default function ContactSection() {
                 variant="outlined"
                 disabled={loading}
                 sx={{
-                  borderColor: "#6000FF",
-                  color: "#6000FF",
+                  borderColor: "#6420F3",
+                  color: "#6420F3",
                   fontWeight: 600,
                   textTransform: "none",
                   fontSize: "0.9rem",
@@ -201,9 +254,9 @@ export default function ContactSection() {
                   px: 3,
                   py: 0.6,
                   "&:hover": {
-                    borderColor: "#7E3AFF",
-                    color: "#7E3AFF",
-                    backgroundColor: "rgba(126,58,255,0.08)",
+                    borderColor: "#28a6e7",
+                    color: "#28a6e7",
+                    backgroundColor: "rgba(100,32,243,0.08)",
                   },
                 }}
               >
@@ -214,8 +267,22 @@ export default function ContactSection() {
         </Box>
       </Box>
 
-      <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(false)}>
-        <Alert severity="success">Message sent successfully!</Alert>
+      <Snackbar 
+        open={success} 
+        autoHideDuration={6000} 
+        onClose={() => setSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert 
+          severity="success" 
+          sx={{
+            backgroundColor: darkMode ? "#1a1a1a" : "#ffffff",
+            color: darkMode ? "#4CAF50" : "#2e7d32",
+            border: `1px solid ${darkMode ? "rgba(76,175,80,0.3)" : "rgba(46,125,50,0.2)"}`,
+          }}
+        >
+          Message sent successfully!
+        </Alert>
       </Snackbar>
     </Box>
   );

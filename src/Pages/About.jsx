@@ -1,4 +1,3 @@
-// src/Pages/About.jsx
 import React, { useState } from "react";
 import {
   Box,
@@ -12,7 +11,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import CodeIcon from "@mui/icons-material/Code";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import profileImage from "../assets/profile.png";
+import profileImage from "../assets/Comic.png";
 
 export default function About() {
   const [activeMilestone, setActiveMilestone] = useState(0);
@@ -24,7 +23,7 @@ export default function About() {
       subtitle: "Computer Science Degree",
       icon: <SchoolIcon />,
       description: "Started my journey in computer science, learning fundamentals of programming, algorithms, and data structures.",
-      skills: ["JavaScript", "HTML/CSS", "Wordpress", "Java"],
+      skills: ["JavaScript", "HTML/CSS", "WordPress", "Java", "Git"],
     },
     {
       year: "2022-2023", 
@@ -32,7 +31,7 @@ export default function About() {
       subtitle: "Junior Frontend Developer",
       icon: <WorkIcon />,
       description: "Landed my first professional role as a frontend developer. Worked on responsive web design and built production applications.",
-      skills: ["React", "TypeScript", "SASS", "Git"],
+      skills: ["React", "TypeScript", "Tailwind CSS", "Material UI", "Framer Motion"],
     },
     {
       year: "2023-2024",
@@ -40,7 +39,7 @@ export default function About() {
       subtitle: "Full Stack Developer",
       icon: <CodeIcon />,
       description: "Expanded into backend development, working with Node.js, databases, and APIs. Led development of full-stack applications.",
-      skills: ["Node.js", "Express", "MongoDB", "REST APIs"],
+      skills: ["Node.js", "Express", "MongoDB", "REST APIs", "Firebase", "PostgreSQL"],
     },
     {
       year: "2024-2025",
@@ -48,20 +47,20 @@ export default function About() {
       subtitle: "Senior Developer & Team Lead", 
       icon: <RocketLaunchIcon />,
       description: "Took on leadership roles, mentoring junior developers and architecting complex systems.",
-      skills: ["Team Leadership", "System Architecture", "AWS", "Docker"],
+      skills: ["Java", "Spring Boot", "NestJS", "System Architecture", "AWS", "Docker"],
     },
     {
       year: "2025-Present",
       title: "Continuous Growth",
       subtitle: "Full Stack Specialist",
       icon: <EmojiEventsIcon />,
-      description: "Currently focused on building innovative digital products and exploring new technologies.",
-      skills: ["Next.js", "GraphQL", "Microservices", "CI/CD"],
+      description: "Currently focused on building innovative digital products, exploring AI-assisted development, and expanding my expertise in modern web technologies.",
+      skills: ["Next.js", "GraphQL", "Microservices", "CI/CD", "Bolt.new", "Cursor AI", "Three.js"],
     }
   ];
 
   return (
-    <Box sx={{ py: 8, backgroundColor: "#000B20", minHeight: "100vh" }}>
+    <Box sx={{ py: 8, backgroundColor: "background.default", minHeight: "100vh" }}>
       <Container maxWidth="lg">
         {/* Header Section */}
         <Box textAlign="center" mb={8}>
@@ -69,7 +68,7 @@ export default function About() {
             variant="h2" 
             sx={{ 
               fontWeight: 700, 
-              color: "white", 
+              color: "text.primary", 
               mb: 2,
               fontSize: { xs: "2.5rem", md: "3rem" }
             }}
@@ -79,7 +78,7 @@ export default function About() {
           <Typography 
             variant="h6" 
             sx={{ 
-              color: "#A0A0A0", 
+              color: "text.secondary", 
               maxWidth: "600px", 
               mx: "auto",
             }}
@@ -88,18 +87,47 @@ export default function About() {
           </Typography>
         </Box>
 
-        {/* Profile Summary */}
-        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: "center", gap: 4, mb: 8, p: 4, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: "16px" }}>
+        {/* Profile Summary - Updated to match hero section style */}
+        <Box sx={{ 
+          display: "flex", 
+          flexDirection: { xs: "column", md: "row" }, 
+          alignItems: "center", 
+          gap: 4, 
+          mb: 8, 
+          p: 4, 
+          backgroundColor: "background.paper", 
+          borderRadius: "16px",
+          border: "1px solid",
+          borderColor: "divider",
+        }}>
+          {/* Avatar with Glassmorphism - Matches Hero Section */}
           <Box
             sx={{
-              width: { xs: 120, md: 150 },
-              height: { xs: 120, md: 150 },
+              position: "relative",
+              width: { xs: 140, md: 170 },
+              height: { xs: 140, md: 170 },
               borderRadius: "50%",
-              backgroundColor: "#6000FF",
+              background: "rgba(255,255,255,0.05)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "3px solid rgba(255,255,255,0.6)",
+              boxShadow: "0 0 40px rgba(100,32,243,0.15), inset 0 0 40px rgba(255,255,255,0.05)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "3px solid #6000FF",
+              padding: "8px",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                inset: "-6px",
+                borderRadius: "50%",
+                padding: "2px",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2))",
+                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                WebkitMaskComposite: "xor",
+                maskComposite: "exclude",
+                pointerEvents: "none",
+              },
             }}
           >
             <Box
@@ -115,15 +143,16 @@ export default function About() {
             />
           </Box>
           <Box sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}>
-            <Typography variant="h4" sx={{ color: "white", fontWeight: 700, mb: 1 }}>
+            <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 700, mb: 1 }}>
               Olaniyi Kamal
             </Typography>
-            <Typography variant="h6" sx={{ color: "#6000FF", fontWeight: 600, mb: 2 }}>
-              Full Stack Developer
+            <Typography variant="h6" sx={{ color: "primary.main", fontWeight: 600, mb: 2 }}>
+              Software Engineer
             </Typography>
-            <Typography variant="body1" sx={{ color: "#A0A0A0", lineHeight: 1.6 }}>
-              With over 3 years of experience in web development, I've evolved from writing 
-              my first lines of code to architecting complex digital solutions.
+            <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.6 }}>
+              With over 3+ years of experience in web development, I've evolved from writing 
+              my first lines of code to architecting complex digital solutions. I specialize in 
+              full-stack development with React, Node.js, Java, and modern AI-assisted tools.
             </Typography>
           </Box>
         </Box>
@@ -141,7 +170,7 @@ export default function About() {
                   top: 0,
                   bottom: 0,
                   width: "2px",
-                  backgroundColor: "#6000FF",
+                  backgroundColor: "primary.main",
                 }}
               />
               
@@ -157,10 +186,11 @@ export default function About() {
                       p: 2,
                       borderRadius: "12px",
                       cursor: "pointer",
-                      backgroundColor: activeMilestone === index ? "rgba(96,0,255,0.2)" : "transparent",
-                      border: activeMilestone === index ? "1px solid #6000FF" : "1px solid transparent",
+                      backgroundColor: activeMilestone === index ? "rgba(12,36,124,0.2)" : "transparent",
+                      border: activeMilestone === index ? "1px solid" : "1px solid transparent",
+                      borderColor: activeMilestone === index ? "primary.main" : "transparent",
                       "&:hover": {
-                        backgroundColor: "rgba(96,0,255,0.1)",
+                        backgroundColor: "rgba(12,36,124,0.1)",
                       }
                     }}
                     onClick={() => setActiveMilestone(index)}
@@ -174,7 +204,7 @@ export default function About() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: activeMilestone === index ? "#6000FF" : "rgba(96,0,255,0.3)",
+                        backgroundColor: activeMilestone === index ? "primary.main" : "rgba(12,36,124,0.3)",
                         color: "white",
                         zIndex: 2,
                         flexShrink: 0,
@@ -188,7 +218,7 @@ export default function About() {
                       <Typography 
                         variant="caption" 
                         sx={{ 
-                          color: "#6000FF", 
+                          color: "primary.main", 
                           fontWeight: 600,
                           fontSize: "0.7rem",
                           display: "block"
@@ -196,7 +226,7 @@ export default function About() {
                       >
                         {milestone.year}
                       </Typography>
-                      <Typography variant="body1" sx={{ color: "white", fontWeight: 600, fontSize: "0.9rem" }}>
+                      <Typography variant="body1" sx={{ color: "text.primary", fontWeight: 600, fontSize: "0.9rem" }}>
                         {milestone.title}
                       </Typography>
                     </Box>
@@ -210,33 +240,34 @@ export default function About() {
           <Box sx={{ width: { xs: "100%", md: "65%" } }}>
             <Box sx={{ 
               p: 4, 
-              backgroundColor: "rgba(255,255,255,0.05)", 
+              backgroundColor: "background.paper", 
               borderRadius: "16px", 
-              border: "1px solid rgba(255,255,255,0.1)",
+              border: "1px solid",
+              borderColor: "divider",
               height: "100%"
             }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
-                <Box sx={{ color: "#6000FF" }}>
+                <Box sx={{ color: "primary.main" }}>
                   {timelineData[activeMilestone].icon}
                 </Box>
                 <Box>
-                  <Typography variant="h4" sx={{ color: "white", fontWeight: 700 }}>
+                  <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 700 }}>
                     {timelineData[activeMilestone].title}
                   </Typography>
-                  <Typography variant="h6" sx={{ color: "#6000FF", fontWeight: 600 }}>
+                  <Typography variant="h6" sx={{ color: "primary.main", fontWeight: 600 }}>
                     {timelineData[activeMilestone].subtitle}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "#A0A0A0" }}>
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     {timelineData[activeMilestone].year}
                   </Typography>
                 </Box>
               </Box>
 
-              <Typography variant="body1" sx={{ color: "#A0A0A0", lineHeight: 1.7, mb: 4 }}>
+              <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.7, mb: 4 }}>
                 {timelineData[activeMilestone].description}
               </Typography>
 
-              <Typography variant="h6" sx={{ color: "white", mb: 2, fontWeight: 600 }}>
+              <Typography variant="h6" sx={{ color: "text.primary", mb: 2, fontWeight: 600 }}>
                 Key Skills & Technologies
               </Typography>
               
@@ -247,9 +278,10 @@ export default function About() {
                     label={skill}
                     size="small"
                     sx={{
-                      backgroundColor: "rgba(0,255,255,0.1)",
-                      color: "#00FFFF",
-                      border: "1px solid #00FFFF",
+                      backgroundColor: "rgba(40,166,231,0.1)",
+                      color: "secondary.main",
+                      border: "1px solid",
+                      borderColor: "secondary.main",
                     }}
                   />
                 ))}

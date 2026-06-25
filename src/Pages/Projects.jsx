@@ -130,7 +130,7 @@ export default function Projects() {
   };
 
   return (
-    <Box sx={{ py: 8, backgroundColor: "#000B20", minHeight: "100vh" }}>
+    <Box sx={{ py: 8, backgroundColor: "background.default", minHeight: "100vh" }}>
       <Container maxWidth="xl">
         {/* Header */}
         <Box textAlign="center" mb={6}>
@@ -138,7 +138,7 @@ export default function Projects() {
             variant="h2" 
             sx={{ 
               fontWeight: 700, 
-              color: "white", 
+              color: "text.primary", 
               mb: 2,
               fontSize: { xs: "2.5rem", md: "3.5rem" }
             }}
@@ -148,7 +148,7 @@ export default function Projects() {
           <Typography 
             variant="h6" 
             sx={{ 
-              color: "#A0A0A0", 
+              color: "text.secondary", 
               maxWidth: "600px", 
               mx: "auto",
               fontSize: { xs: "1rem", md: "1.25rem" }
@@ -167,12 +167,12 @@ export default function Projects() {
               onClick={() => setFilter(category)}
               variant={filter === category ? "filled" : "outlined"}
               sx={{
-                color: filter === category ? "white" : "#6000FF",
-                backgroundColor: filter === category ? "#6000FF" : "transparent",
-                borderColor: "#6000FF",
+                color: filter === category ? "background.default" : "primary.main",
+                backgroundColor: filter === category ? "primary.main" : "transparent",
+                borderColor: "primary.main",
                 fontWeight: 600,
                 "&:hover": {
-                  backgroundColor: filter === category ? "#4B00CC" : "rgba(96,0,255,0.1)",
+                  backgroundColor: filter === category ? "secondary.main" : "rgba(12,36,124,0.1)",
                 }
               }}
             />
@@ -193,10 +193,10 @@ export default function Projects() {
               {filteredProjects.map((project, index) => (
                 <Grid 
                   item 
-                  xs={12}      // 1 column on mobile
-                  sm={6}       // 2 columns on tablet
-                  md={4}       // 3 columns on medium
-                  lg={3}       // 4 columns on large
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
                   key={project.id}
                   sx={{
                     display: 'flex',
@@ -216,9 +216,10 @@ export default function Projects() {
                   >
                     <Card 
                       sx={{ 
-                        backgroundColor: "rgba(255,255,255,0.05)",
+                        backgroundColor: "background.paper",
                         backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255,255,255,0.1)",
+                        border: "1px solid",
+                        borderColor: "divider",
                         borderRadius: "16px",
                         cursor: "pointer",
                         transition: "all 0.3s ease",
@@ -228,8 +229,8 @@ export default function Projects() {
                         width: '100%',
                         "&:hover": {
                           transform: "translateY(-8px)",
-                          boxShadow: "0 20px 40px rgba(96,0,255,0.3)",
-                          borderColor: "#6000FF",
+                          boxShadow: "0 20px 40px rgba(12,36,124,0.3)",
+                          borderColor: "primary.main",
                         }
                       }}
                       onClick={() => setSelectedProject(project)}
@@ -241,8 +242,8 @@ export default function Projects() {
                             label="Featured" 
                             size="small"
                             sx={{ 
-                              backgroundColor: "#00FFFF", 
-                              color: "#000B20",
+                              backgroundColor: "secondary.main", 
+                              color: "background.default",
                               fontWeight: "bold",
                               fontSize: "0.7rem"
                             }}
@@ -274,7 +275,7 @@ export default function Projects() {
                             variant="h6" 
                             sx={{ 
                               fontWeight: 600, 
-                              color: "white", 
+                              color: "text.primary", 
                               mb: 1,
                               fontSize: "1rem",
                               lineHeight: 1.3,
@@ -289,7 +290,7 @@ export default function Projects() {
                           <Typography 
                             variant="body2" 
                             sx={{ 
-                              color: "#A0A0A0", 
+                              color: "text.secondary", 
                               mb: 2,
                               lineHeight: 1.4,
                               fontSize: '0.85rem',
@@ -310,8 +311,8 @@ export default function Projects() {
                                 size="small"
                                 variant="outlined"
                                 sx={{
-                                  color: "#00FFFF",
-                                  borderColor: "#00FFFF",
+                                  color: "secondary.main",
+                                  borderColor: "secondary.main",
                                   fontSize: "0.65rem",
                                   height: "22px"
                                 }}
@@ -323,7 +324,7 @@ export default function Projects() {
                                 size="small"
                                 sx={{
                                   backgroundColor: "rgba(255,255,255,0.1)",
-                                  color: "white",
+                                  color: "text.primary",
                                   fontSize: "0.65rem",
                                   height: "22px"
                                 }}
@@ -349,7 +350,7 @@ export default function Projects() {
           fullScreen={isMobile}
           PaperProps={{
             sx: {
-              backgroundColor: "#0A1126",
+              backgroundColor: "background.default",
               backgroundImage: "none",
               borderRadius: isMobile ? 0 : "16px",
               overflow: 'hidden'
@@ -367,7 +368,7 @@ export default function Projects() {
                       top: 16,
                       right: 16,
                       zIndex: 3,
-                      color: "white",
+                      color: "text.primary",
                       backgroundColor: "rgba(0,0,0,0.5)",
                       "&:hover": {
                         backgroundColor: "rgba(0,0,0,0.7)",
@@ -383,7 +384,7 @@ export default function Projects() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: "black"
+                    backgroundColor: "background.paper"
                   }}>
                     <img 
                       src={selectedProject.image} 
@@ -398,15 +399,15 @@ export default function Projects() {
                   </Box>
 
                   <Box sx={{ p: 4 }}>
-                    <Typography variant="h4" sx={{ color: "white", mb: 2, fontWeight: 700 }}>
+                    <Typography variant="h4" sx={{ color: "text.primary", mb: 2, fontWeight: 700 }}>
                       {selectedProject.title}
                     </Typography>
 
-                    <Typography variant="body1" sx={{ color: "#A0A0A0", mb: 3, lineHeight: 1.6 }}>
+                    <Typography variant="body1" sx={{ color: "text.secondary", mb: 3, lineHeight: 1.6 }}>
                       {selectedProject.fullDescription}
                     </Typography>
 
-                    <Typography variant="h6" sx={{ color: "white", mb: 2, fontWeight: 600 }}>
+                    <Typography variant="h6" sx={{ color: "text.primary", mb: 2, fontWeight: 600 }}>
                       Technologies Used
                     </Typography>
 
@@ -416,9 +417,9 @@ export default function Projects() {
                           key={tech}
                           label={tech}
                           sx={{
-                            color: "#00FFFF",
-                            borderColor: "#00FFFF",
-                            backgroundColor: "rgba(0,255,255,0.1)",
+                            color: "secondary.main",
+                            borderColor: "secondary.main",
+                            backgroundColor: "rgba(40,166,231,0.1)",
                           }}
                           variant="outlined"
                         />

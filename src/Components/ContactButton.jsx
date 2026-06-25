@@ -9,7 +9,7 @@ export default function ContactButton({ text = "Contact Me" }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} // fade-up from below
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
@@ -17,8 +17,8 @@ export default function ContactButton({ text = "Contact Me" }) {
         variant="contained"
         sx={{
           mt: 3,
-          backgroundColor: "#6000FF",
-          color: "#fff",
+          backgroundColor: "primary.main",
+          color: "text.primary",
           fontWeight: "bold",
           px: 4,
           py: 1.5,
@@ -26,8 +26,8 @@ export default function ContactButton({ text = "Contact Me" }) {
           textTransform: "none",
           transition: "all 0.3s ease-in-out",
           "&:hover": {
-            backgroundColor: "#4B00CC",
-            boxShadow: "0 0 15px rgba(96,0,255,0.7)",
+            backgroundColor: "secondary.main",
+            boxShadow: "0 0 15px rgba(12,36,124,0.7)",
             transform: "scale(1.05)",
           },
         }}
