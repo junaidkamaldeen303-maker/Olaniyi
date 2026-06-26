@@ -184,7 +184,7 @@ export default function HeroSection() {
             >
               <Box
                 component="img"
-                src="/src/assets/Comic.png"
+                src="/Comic.png"
                 alt="Olaniyi Kamal"
                 sx={{
                   width: "85%",
@@ -411,7 +411,7 @@ export default function HeroSection() {
             >
               <Box
                 component="img"
-                src="/src/assets/Comic.png"
+                src="/Comic.png"
                 alt="Olaniyi Kamal"
                 sx={{
                   width: "85%",
