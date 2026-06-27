@@ -13,6 +13,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
 import { useTheme } from "../themes/theme";
+import comicImage from "../assets/Comic.png"; // ✅ Import the image
 
 export default function Footer() {
   const { darkMode } = useTheme();
@@ -152,7 +153,7 @@ export default function Footer() {
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
               <Avatar
-                src="/src/assets/Comic.png"
+                src={comicImage}
                 alt="Olaniyi Kamal"
                 sx={{
                   width: 40,
