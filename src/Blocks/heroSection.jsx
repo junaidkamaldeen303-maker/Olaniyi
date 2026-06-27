@@ -4,6 +4,7 @@ import { Box, Typography, Button, Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useTheme } from "../themes/theme";
+import comicImage from "../assets/Comic.png"; // ✅ Import the image directly
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -155,9 +156,9 @@ export default function HeroSection() {
             display: { xs: "flex", md: "none" },
             flexDirection: "row",
             alignItems: "center",
-            gap: 3,
+            gap: 2,
             width: "100%",
-            mb: 2,
+            mb: 1,
           }}
         >
           {/* Small Avatar for Mobile */}
@@ -169,8 +170,8 @@ export default function HeroSection() {
           >
             <Box
               sx={{
-                width: "70px",
-                height: "70px",
+                width: "60px",
+                height: "60px",
                 borderRadius: "50%",
                 backgroundColor: "#F3F3F3",
                 display: "flex",
@@ -184,7 +185,7 @@ export default function HeroSection() {
             >
               <Box
                 component="img"
-                src="/Comic.png"
+                src={comicImage}
                 alt="Olaniyi Kamal"
                 sx={{
                   width: "85%",
@@ -210,7 +211,7 @@ export default function HeroSection() {
                 variant="h1"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: "1.6rem",
+                  fontSize: "1.4rem",
                   fontWeight: 400,
                   color: colors.primaryText,
                   lineHeight: 1.1,
@@ -263,19 +264,19 @@ export default function HeroSection() {
             </motion.div>
           </Box>
 
-          {/* Description Paragraph */}
+          {/* Description Paragraph - Reduced top margin on mobile/tablet */}
           <motion.div variants={itemVariants}>
             <Typography
               variant="body1"
               sx={{
                 fontFamily: "'Inter', 'Manrope', sans-serif",
-                fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem", lg: "1.35rem" },
+                fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
                 fontWeight: 500,
                 color: colors.secondaryText,
-                lineHeight: { xs: 1.6, md: 1.8 },
+                lineHeight: { xs: 1.5, sm: 1.6, md: 1.8 },
                 maxWidth: { xs: "100%", md: "620px" },
-                mt: { xs: 1, md: 3 },
-                mb: { xs: 1.5, md: 2.5 },
+                mt: { xs: 0.5, sm: 1, md: 3 },
+                mb: { xs: 1, sm: 1.5, md: 2.5 },
                 transition: "color 0.3s ease",
               }}
             >
@@ -283,18 +284,18 @@ export default function HeroSection() {
             </Typography>
           </motion.div>
 
-          {/* Personal Motto */}
+          {/* Personal Motto - Reduced spacing on mobile/tablet */}
           <motion.div variants={itemVariants}>
             <Typography
               variant="h5"
               sx={{
                 fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.4rem", lg: "1.8rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.4rem", lg: "1.8rem" },
                 fontWeight: 400,
                 fontStyle: "italic",
                 color: colors.primaryText,
-                mb: { xs: 2, md: 4 },
-                mt: { xs: 0.5, md: 1 },
+                mb: { xs: 1.5, sm: 2, md: 4 },
+                mt: { xs: 0.3, sm: 0.5, md: 1 },
                 transition: "color 0.3s ease",
               }}
             >
@@ -302,26 +303,26 @@ export default function HeroSection() {
             </Typography>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Responsive sizing */}
           <motion.div variants={buttonVariants}>
             <Stack
               direction={{ xs: "row", sm: "row" }}
-              spacing={{ xs: 1.5, sm: 2.5 }}
-              sx={{ gap: { xs: "12px", sm: "20px" }, flexWrap: "wrap" }}
+              spacing={{ xs: 1, sm: 2 }}
+              sx={{ gap: { xs: "8px", sm: "16px" }, flexWrap: "wrap" }}
             >
               <Button
                 variant="contained"
                 onClick={() => navigate('/projects')}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "16px", md: "20px" } }} />}
+                endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "14px", md: "20px" } }} />}
                 sx={{
                   backgroundColor: colors.buttonPrimaryBg,
                   color: colors.buttonPrimaryText,
                   fontWeight: 600,
-                  fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem" },
-                  px: { xs: "20px", sm: "28px", md: "32px" },
-                  py: { xs: "12px", sm: "15px", md: "18px" },
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
+                  px: { xs: "14px", sm: "20px", md: "32px" },
+                  py: { xs: "8px", sm: "12px", md: "18px" },
                   borderRadius: "10px",
                   textTransform: "none",
                   transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
@@ -332,7 +333,7 @@ export default function HeroSection() {
                     boxShadow: "none",
                   },
                   "& .MuiButton-endIcon": {
-                    marginLeft: { xs: "4px", md: "8px" },
+                    marginLeft: { xs: "2px", md: "8px" },
                   },
                 }}
               >
@@ -348,9 +349,9 @@ export default function HeroSection() {
                   borderColor: colors.buttonSecondaryBorder,
                   color: colors.buttonSecondaryText,
                   fontWeight: 500,
-                  fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem" },
-                  px: { xs: "20px", sm: "28px", md: "32px" },
-                  py: { xs: "12px", sm: "15px", md: "18px" },
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
+                  px: { xs: "14px", sm: "20px", md: "32px" },
+                  py: { xs: "8px", sm: "12px", md: "18px" },
                   borderRadius: "10px",
                   textTransform: "none",
                   transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
@@ -411,7 +412,7 @@ export default function HeroSection() {
             >
               <Box
                 component="img"
-                src="/Comic.png"
+                src={comicImage}
                 alt="Olaniyi Kamal"
                 sx={{
                   width: "85%",
