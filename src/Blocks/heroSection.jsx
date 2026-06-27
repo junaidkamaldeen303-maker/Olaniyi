@@ -146,7 +146,7 @@ export default function HeroSection() {
           zIndex: 2,
           height: { xs: "auto", sm: "auto", md: "100%" },
           minHeight: { xs: "auto", sm: "auto", md: "100%" },
-          py: { xs: 1.5, sm: 2, md: 0 },
+          py: { xs: 0.5, sm: 1, md: 0 }, // Reduced padding top on mobile
         }}
       >
         {/* Mobile/Tablet Layout: Avatar + Heading Row */}
@@ -158,6 +158,7 @@ export default function HeroSection() {
             gap: { xs: 2, sm: 2.5 },
             width: "100%",
             mb: { xs: 1, sm: 1.5 },
+            mt: { xs: 0.5, sm: 1 }, // Reduced top margin on mobile
           }}
         >
           {/* Small Avatar for Mobile/Tablet */}
@@ -339,17 +340,17 @@ export default function HeroSection() {
                     fontSize: { 
                       xs: "0.85rem", 
                       sm: "0.9rem", 
-                      md: "1rem" 
+                      md: "1rem"
                     },
                     px: { 
                       xs: "18px", 
                       sm: "22px", 
-                      md: "32px" 
+                      md: "32px"
                     },
                     py: { 
                       xs: "10px", 
                       sm: "12px", 
-                      md: "18px" 
+                      md: "18px"
                     },
                     borderRadius: "10px",
                     textTransform: "none",
@@ -380,17 +381,17 @@ export default function HeroSection() {
                     fontSize: { 
                       xs: "0.85rem", 
                       sm: "0.9rem", 
-                      md: "1rem" 
+                      md: "1rem"
                     },
                     px: { 
                       xs: "18px", 
                       sm: "22px", 
-                      md: "32px" 
+                      md: "32px"
                     },
                     py: { 
                       xs: "10px", 
                       sm: "12px", 
-                      md: "18px" 
+                      md: "18px"
                     },
                     borderRadius: "10px",
                     textTransform: "none",
