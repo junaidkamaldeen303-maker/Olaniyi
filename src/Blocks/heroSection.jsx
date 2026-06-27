@@ -87,11 +87,12 @@ export default function HeroSection() {
         minHeight: "100vh",
         height: "100vh",
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "center",
         backgroundColor: colors.background,
         overflow: "hidden",
         px: { xs: 2, sm: 3, md: 6, lg: 10 },
+        pt: { xs: 12, sm: 14, md: 16 },
         transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
@@ -141,11 +142,10 @@ export default function HeroSection() {
           justifyContent: "space-between",
           width: "100%",
           maxWidth: "1500px",
-          gap: { xs: 2, md: 4, lg: 0 },
+          gap: { xs: 3, md: 4, lg: 0 },
           position: "relative",
           zIndex: 2,
           height: { xs: "auto", md: "100%" },
-          minHeight: { xs: "auto", md: "100%" },
         }}
       >
         {/* Mobile Layout: Avatar + Heading Row */}
@@ -154,9 +154,9 @@ export default function HeroSection() {
             display: { xs: "flex", md: "none" },
             flexDirection: "row",
             alignItems: "center",
-            gap: 2,
+            gap: 2.5,
             width: "100%",
-            mb: 0.2,
+            mb: 2,
           }}
         >
           {/* Small Avatar for Mobile */}
@@ -168,8 +168,8 @@ export default function HeroSection() {
           >
             <Box
               sx={{
-                width: "60px",
-                height: "60px",
+                width: "65px",
+                height: "65px",
                 borderRadius: "50%",
                 backgroundColor: "#F3F3F3",
                 display: "flex",
@@ -209,10 +209,10 @@ export default function HeroSection() {
                 variant="h1"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: "1.4rem",
+                  fontSize: "1.6rem",
                   fontWeight: 400,
                   color: colors.primaryText,
-                  lineHeight: 1.1,
+                  lineHeight: 1.15,
                   transition: "color 0.3s ease",
                 }}
               >
@@ -269,19 +269,19 @@ export default function HeroSection() {
               </motion.div>
             </Box>
 
-            {/* Description Paragraph - Perfect spacing on mobile */}
+            {/* Description Paragraph - Larger font on mobile */}
             <motion.div variants={itemVariants}>
               <Typography
                 variant="body1"
                 sx={{
                   fontFamily: "'Inter', 'Manrope', sans-serif",
-                  fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
+                  fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem", lg: "1.35rem" },
                   fontWeight: 500,
                   color: colors.secondaryText,
-                  lineHeight: { xs: 1.5, sm: 1.6, md: 1.8 },
+                  lineHeight: { xs: 1.6, sm: 1.6, md: 1.8 },
                   maxWidth: { xs: "100%", md: "620px" },
-                  mt: { xs: 0.8, sm: 1, md: 3 },
-                  mb: { xs: 0.5, sm: 0.8, md: 2.5 },
+                  mt: { xs: 1.5, sm: 2, md: 3 },
+                  mb: { xs: 1, sm: 1.2, md: 2.5 },
                   transition: "color 0.3s ease",
                 }}
               >
@@ -289,18 +289,18 @@ export default function HeroSection() {
               </Typography>
             </motion.div>
 
-            {/* Personal Motto - Perfect spacing on mobile */}
+            {/* Personal Motto - Larger font on mobile */}
             <motion.div variants={itemVariants}>
               <Typography
                 variant="h5"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: { xs: "0.85rem", sm: "1rem", md: "1.4rem", lg: "1.8rem" },
+                  fontSize: { xs: "1rem", sm: "1.1rem", md: "1.4rem", lg: "1.8rem" },
                   fontWeight: 400,
                   fontStyle: "italic",
                   color: colors.primaryText,
-                  mb: { xs: 0.8, sm: 1.2, md: 4 },
-                  mt: { xs: 0.2, sm: 0.3, md: 1 },
+                  mb: { xs: 1.5, sm: 2, md: 4 },
+                  mt: { xs: 0.5, sm: 0.5, md: 1 },
                   transition: "color 0.3s ease",
                 }}
               >
@@ -308,26 +308,26 @@ export default function HeroSection() {
               </Typography>
             </motion.div>
 
-            {/* CTA Buttons - Responsive sizing */}
+            {/* CTA Buttons - Larger on mobile */}
             <motion.div variants={buttonVariants}>
               <Stack
                 direction={{ xs: "row", sm: "row" }}
-                spacing={{ xs: 0.8, sm: 1.5 }}
-                sx={{ gap: { xs: "8px", sm: "12px" }, flexWrap: "wrap" }}
+                spacing={{ xs: 1.5, sm: 2 }}
+                sx={{ gap: { xs: "12px", sm: "16px" }, flexWrap: "wrap" }}
               >
                 <Button
                   variant="contained"
                   onClick={() => navigate('/projects')}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "14px", md: "20px" } }} />}
+                  endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "18px", md: "20px" } }} />}
                   sx={{
                     backgroundColor: colors.buttonPrimaryBg,
                     color: colors.buttonPrimaryText,
                     fontWeight: 600,
-                    fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
-                    px: { xs: "14px", sm: "20px", md: "32px" },
-                    py: { xs: "8px", sm: "10px", md: "18px" },
+                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
+                    px: { xs: "18px", sm: "24px", md: "32px" },
+                    py: { xs: "10px", sm: "12px", md: "18px" },
                     borderRadius: "10px",
                     textTransform: "none",
                     transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
@@ -338,7 +338,7 @@ export default function HeroSection() {
                       boxShadow: "none",
                     },
                     "& .MuiButton-endIcon": {
-                      marginLeft: { xs: "2px", md: "8px" },
+                      marginLeft: { xs: "4px", md: "8px" },
                     },
                   }}
                 >
@@ -354,9 +354,9 @@ export default function HeroSection() {
                     borderColor: colors.buttonSecondaryBorder,
                     color: colors.buttonSecondaryText,
                     fontWeight: 500,
-                    fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
-                    px: { xs: "14px", sm: "20px", md: "32px" },
-                    py: { xs: "8px", sm: "10px", md: "18px" },
+                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
+                    px: { xs: "18px", sm: "24px", md: "32px" },
+                    py: { xs: "10px", sm: "12px", md: "18px" },
                     borderRadius: "10px",
                     textTransform: "none",
                     transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
