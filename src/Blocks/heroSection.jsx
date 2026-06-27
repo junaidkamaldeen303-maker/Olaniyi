@@ -84,14 +84,15 @@ export default function HeroSection() {
       ref={containerRef}
       sx={{
         position: "relative",
-        minHeight: "100vh",
-        height: "100vh",
+        minHeight: { xs: "100vh", md: "100vh" },
+        height: { xs: "100vh", md: "100vh" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.background,
         overflow: "hidden",
         px: { xs: 2, sm: 3, md: 6, lg: 10 },
+        py: { xs: 1, md: 6 }, // Reduced from 4 to 1 on mobile
         transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
@@ -136,32 +137,31 @@ export default function HeroSection() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", sm: "column", md: "row" },
-          alignItems: { xs: "center", sm: "center", md: "center" },
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "center", md: "center" },
           justifyContent: "space-between",
           width: "100%",
           maxWidth: "1500px",
-          gap: { xs: 2, sm: 2.5, md: 4, lg: 0 },
+          gap: { xs: 2, md: 4, lg: 0 },
           position: "relative",
           zIndex: 2,
-          height: { xs: "auto", sm: "auto", md: "100%" },
-          minHeight: { xs: "auto", sm: "auto", md: "100%" },
-          py: { xs: 0.5, sm: 1, md: 0 }, // Reduced padding top on mobile
+          height: { xs: "auto", md: "100%" },
+          minHeight: { xs: "auto", md: "100%" }, // Changed from 90vh to auto on mobile
+          py: { xs: 0.5, md: 0 }, // Reduced padding on mobile
         }}
       >
-        {/* Mobile/Tablet Layout: Avatar + Heading Row */}
+        {/* Mobile Layout: Avatar + Heading Row */}
         <Box
           sx={{
-            display: { xs: "flex", sm: "flex", md: "none" },
+            display: { xs: "flex", md: "none" },
             flexDirection: "row",
             alignItems: "center",
-            gap: { xs: 2, sm: 2.5 },
+            gap: 2,
             width: "100%",
-            mb: { xs: 1, sm: 1.5 },
-            mt: { xs: 0.5, sm: 1 }, // Reduced top margin on mobile
+            mb: 0.5, // Reduced from 1 to 0.5
           }}
         >
-          {/* Small Avatar for Mobile/Tablet */}
+          {/* Small Avatar for Mobile */}
           <motion.div
             variants={avatarVariants}
             initial="hidden"
@@ -170,8 +170,8 @@ export default function HeroSection() {
           >
             <Box
               sx={{
-                width: { xs: "60px", sm: "70px" },
-                height: { xs: "60px", sm: "70px" },
+                width: "60px",
+                height: "60px",
                 borderRadius: "50%",
                 backgroundColor: "#F3F3F3",
                 display: "flex",
@@ -199,7 +199,7 @@ export default function HeroSection() {
             </Box>
           </motion.div>
 
-          {/* Mobile/Tablet Heading */}
+          {/* Mobile Heading - Small */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -211,10 +211,10 @@ export default function HeroSection() {
                 variant="h1"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: { xs: "1.5rem", sm: "1.8rem" },
+                  fontSize: "1.4rem",
                   fontWeight: 400,
                   color: colors.primaryText,
-                  lineHeight: 1.15,
+                  lineHeight: 1.1,
                   transition: "color 0.3s ease",
                 }}
               >
@@ -226,196 +226,154 @@ export default function HeroSection() {
           </motion.div>
         </Box>
 
-        {/* Left Column */}
+        {/* Left Column - Desktop & Tablet */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           style={{
+            flex: { xs: "1 1 100%", md: "0 0 58%" },
+            maxWidth: { xs: "100%", md: "58%" },
             width: "100%",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
+            height: { xs: "auto", md: "100%" },
           }}
         >
-          <Box
-            sx={{
-              flex: { xs: "1 1 100%", sm: "1 1 100%", md: "0 0 58%" },
-              maxWidth: { xs: "100%", sm: "100%", md: "58%" },
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: { xs: "flex-start", sm: "flex-start", md: "center" },
-              height: { xs: "auto", sm: "auto", md: "100%" },
-            }}
-          >
-            {/* Desktop Heading - Hidden on Mobile/Tablet */}
-            <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
-              <motion.div variants={itemVariants}>
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                    fontSize: { xs: "2.8rem", sm: "3.5rem", md: "4.5rem", lg: "5.5rem", xl: "6.5rem" },
-                    fontWeight: 400,
-                    color: colors.primaryText,
-                    lineHeight: 0.95,
-                    letterSpacing: "-0.02em",
-                    mb: 1,
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  Hey there, <span style={{ fontStyle: "italic" }}>I'm</span>
-                  <br />
-                  <span style={{ fontStyle: "italic" }}>Olaniyi Kamal.</span>
-                </Typography>
-              </motion.div>
-            </Box>
-
-            {/* Description Paragraph */}
+          {/* Desktop Heading - Hidden on Mobile */}
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
             <motion.div variants={itemVariants}>
               <Typography
-                variant="body1"
-                sx={{
-                  fontFamily: "'Inter', 'Manrope', sans-serif",
-                  fontSize: { 
-                    xs: "0.95rem", 
-                    sm: "1rem", 
-                    md: "1.1rem", 
-                    lg: "1.35rem" 
-                  },
-                  fontWeight: 500,
-                  color: colors.secondaryText,
-                  lineHeight: { xs: 1.6, sm: 1.6, md: 1.8 },
-                  maxWidth: { xs: "100%", sm: "100%", md: "620px" },
-                  mt: { xs: 0.5, sm: 0.8, md: 3 },
-                  mb: { xs: 0.8, sm: 1, md: 2.5 },
-                  transition: "color 0.3s ease",
-                }}
-              >
-                I'm a software developer building scalable, simple digital products across education, healthcare, developer tools, cloud systems, blockchain systems, LLMs, and more.
-              </Typography>
-            </motion.div>
-
-            {/* Personal Motto */}
-            <motion.div variants={itemVariants}>
-              <Typography
-                variant="h5"
+                variant="h1"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: { 
-                    xs: "1rem", 
-                    sm: "1.1rem", 
-                    md: "1.4rem", 
-                    lg: "1.8rem" 
-                  },
+                  fontSize: { xs: "2.8rem", sm: "3.5rem", md: "4.5rem", lg: "5.5rem", xl: "6.5rem" },
                   fontWeight: 400,
-                  fontStyle: "italic",
                   color: colors.primaryText,
-                  mb: { xs: 1.2, sm: 1.5, md: 4 },
-                  mt: { xs: 0.3, sm: 0.5, md: 1 },
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.02em",
+                  mb: 1,
                   transition: "color 0.3s ease",
                 }}
               >
-                I ship really cool stuff.
+                Hey there, <span style={{ fontStyle: "italic" }}>I'm</span>
+                <br />
+                <span style={{ fontStyle: "italic" }}>Olaniyi Kamal.</span>
               </Typography>
             </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div variants={buttonVariants}>
-              <Stack
-                direction={{ xs: "row", sm: "row", md: "row" }}
-                spacing={{ xs: 1.5, sm: 2, md: 2.5 }}
-                sx={{ gap: { xs: "12px", sm: "16px", md: "20px" }, flexWrap: "wrap" }}
-              >
-                <Button
-                  variant="contained"
-                  onClick={() => navigate('/projects')}
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                  endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "18px", sm: "20px", md: "20px" } }} />}
-                  sx={{
-                    backgroundColor: colors.buttonPrimaryBg,
-                    color: colors.buttonPrimaryText,
-                    fontWeight: 600,
-                    fontSize: { 
-                      xs: "0.85rem", 
-                      sm: "0.9rem", 
-                      md: "1rem"
-                    },
-                    px: { 
-                      xs: "18px", 
-                      sm: "22px", 
-                      md: "32px"
-                    },
-                    py: { 
-                      xs: "10px", 
-                      sm: "12px", 
-                      md: "18px"
-                    },
-                    borderRadius: "10px",
-                    textTransform: "none",
-                    transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
-                    minWidth: { xs: "auto", sm: "auto", md: "auto" },
-                    "&:hover": {
-                      backgroundColor: colors.buttonPrimaryHover,
-                      transform: "translateY(-2px)",
-                      boxShadow: "none",
-                    },
-                    "& .MuiButton-endIcon": {
-                      marginLeft: { xs: "4px", md: "8px" },
-                    },
-                  }}
-                >
-                  View Projects
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  onClick={() => navigate('/contact')}
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                  sx={{
-                    borderColor: colors.buttonSecondaryBorder,
-                    color: colors.buttonSecondaryText,
-                    fontWeight: 500,
-                    fontSize: { 
-                      xs: "0.85rem", 
-                      sm: "0.9rem", 
-                      md: "1rem"
-                    },
-                    px: { 
-                      xs: "18px", 
-                      sm: "22px", 
-                      md: "32px"
-                    },
-                    py: { 
-                      xs: "10px", 
-                      sm: "12px", 
-                      md: "18px"
-                    },
-                    borderRadius: "10px",
-                    textTransform: "none",
-                    transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
-                    minWidth: { xs: "auto", sm: "auto", md: "auto" },
-                    "&:hover": {
-                      backgroundColor: colors.buttonSecondaryHoverBg,
-                      color: colors.buttonSecondaryHoverText,
-                      borderColor: colors.buttonSecondaryHoverBg,
-                      transform: "translateY(-2px)",
-                    },
-                  }}
-                >
-                  Get In Touch
-                </Button>
-              </Stack>
-            </motion.div>
           </Box>
+
+          {/* Description Paragraph */}
+          <motion.div variants={itemVariants}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: "'Inter', 'Manrope', sans-serif",
+                fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
+                fontWeight: 500,
+                color: colors.secondaryText,
+                lineHeight: { xs: 1.5, sm: 1.6, md: 1.8 },
+                maxWidth: { xs: "100%", md: "620px" },
+                mt: { xs: 0.3, sm: 1, md: 3 }, // Reduced on mobile
+                mb: { xs: 0.5, sm: 1.5, md: 2.5 }, // Reduced on mobile
+                transition: "color 0.3s ease",
+              }}
+            >
+              I'm a software developer building scalable, simple digital products across education, healthcare, developer tools, cloud systems, blockchain systems, LLMs, and more.
+            </Typography>
+          </motion.div>
+
+          {/* Personal Motto */}
+          <motion.div variants={itemVariants}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontFamily: "'Playfair Display', 'Instrument Serif', serif",
+                fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.4rem", lg: "1.8rem" },
+                fontWeight: 400,
+                fontStyle: "italic",
+                color: colors.primaryText,
+                mb: { xs: 1, sm: 2, md: 4 }, // Reduced on mobile
+                mt: { xs: 0.2, sm: 0.5, md: 1 }, // Reduced on mobile
+                transition: "color 0.3s ease",
+              }}
+            >
+              I ship really cool stuff.
+            </Typography>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div variants={buttonVariants}>
+            <Stack
+              direction={{ xs: "row", sm: "row" }}
+              spacing={{ xs: 1, sm: 2 }}
+              sx={{ gap: { xs: "8px", sm: "16px" }, flexWrap: "wrap" }}
+            >
+              <Button
+                variant="contained"
+                onClick={() => navigate('/projects')}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "14px", md: "20px" } }} />}
+                sx={{
+                  backgroundColor: colors.buttonPrimaryBg,
+                  color: colors.buttonPrimaryText,
+                  fontWeight: 600,
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
+                  px: { xs: "14px", sm: "20px", md: "32px" },
+                  py: { xs: "8px", sm: "12px", md: "18px" },
+                  borderRadius: "10px",
+                  textTransform: "none",
+                  transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
+                  minWidth: { xs: "auto", sm: "auto" },
+                  "&:hover": {
+                    backgroundColor: colors.buttonPrimaryHover,
+                    transform: "translateY(-2px)",
+                    boxShadow: "none",
+                  },
+                  "& .MuiButton-endIcon": {
+                    marginLeft: { xs: "2px", md: "8px" },
+                  },
+                }}
+              >
+                View Projects
+              </Button>
+
+              <Button
+                variant="outlined"
+                onClick={() => navigate('/contact')}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                sx={{
+                  borderColor: colors.buttonSecondaryBorder,
+                  color: colors.buttonSecondaryText,
+                  fontWeight: 500,
+                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
+                  px: { xs: "14px", sm: "20px", md: "32px" },
+                  py: { xs: "8px", sm: "12px", md: "18px" },
+                  borderRadius: "10px",
+                  textTransform: "none",
+                  transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
+                  minWidth: { xs: "auto", sm: "auto" },
+                  "&:hover": {
+                    backgroundColor: colors.buttonSecondaryHoverBg,
+                    color: colors.buttonSecondaryHoverText,
+                    borderColor: colors.buttonSecondaryHoverBg,
+                    transform: "translateY(-2px)",
+                  },
+                }}
+              >
+                Get In Touch
+              </Button>
+            </Stack>
+          </motion.div>
         </motion.div>
 
-        {/* Right Column - Avatar (Desktop only) */}
+        {/* Right Column - Avatar (Desktop & Tablet) */}
         <Box
           sx={{
-            display: { xs: "none", sm: "none", md: "flex" },
+            display: { xs: "none", md: "flex" },
             flex: "0 0 42%",
             maxWidth: "42%",
             width: "100%",
