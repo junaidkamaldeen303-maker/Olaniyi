@@ -4,7 +4,7 @@ import { Box, Typography, Button, Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useTheme } from "../themes/theme";
-import comicImage from "../assets/Comic.png";
+import comicImage from "../assets/Comic.png"; // ✅ Import the image directly
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -84,15 +84,15 @@ export default function HeroSection() {
       ref={containerRef}
       sx={{
         position: "relative",
-        minHeight: { xs: "100vh", md: "100vh" },
-        height: { xs: "100vh", md: "100vh" },
+        minHeight: "100vh",
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.background,
         overflow: "hidden",
         px: { xs: 2, sm: 3, md: 6, lg: 10 },
-        py: { xs: 1, md: 6 }, // Reduced from 4 to 1 on mobile
+        py: { xs: 2, md: 6 },
         transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
@@ -146,8 +146,8 @@ export default function HeroSection() {
           position: "relative",
           zIndex: 2,
           height: { xs: "auto", md: "100%" },
-          minHeight: { xs: "auto", md: "100%" }, // Changed from 90vh to auto on mobile
-          py: { xs: 0.5, md: 0 }, // Reduced padding on mobile
+          minHeight: { xs: "90vh", md: "100%" },
+          py: { xs: 4, md: 0 },
         }}
       >
         {/* Mobile Layout: Avatar + Heading Row */}
@@ -158,7 +158,7 @@ export default function HeroSection() {
             alignItems: "center",
             gap: 2,
             width: "100%",
-            mb: 0.5, // Reduced from 1 to 0.5
+            mb: 1,
           }}
         >
           {/* Small Avatar for Mobile */}
@@ -264,7 +264,7 @@ export default function HeroSection() {
             </motion.div>
           </Box>
 
-          {/* Description Paragraph */}
+          {/* Description Paragraph - Reduced top margin on mobile/tablet */}
           <motion.div variants={itemVariants}>
             <Typography
               variant="body1"
@@ -275,8 +275,8 @@ export default function HeroSection() {
                 color: colors.secondaryText,
                 lineHeight: { xs: 1.5, sm: 1.6, md: 1.8 },
                 maxWidth: { xs: "100%", md: "620px" },
-                mt: { xs: 0.3, sm: 1, md: 3 }, // Reduced on mobile
-                mb: { xs: 0.5, sm: 1.5, md: 2.5 }, // Reduced on mobile
+                mt: { xs: 0.5, sm: 1, md: 3 },
+                mb: { xs: 1, sm: 1.5, md: 2.5 },
                 transition: "color 0.3s ease",
               }}
             >
@@ -284,7 +284,7 @@ export default function HeroSection() {
             </Typography>
           </motion.div>
 
-          {/* Personal Motto */}
+          {/* Personal Motto - Reduced spacing on mobile/tablet */}
           <motion.div variants={itemVariants}>
             <Typography
               variant="h5"
@@ -294,8 +294,8 @@ export default function HeroSection() {
                 fontWeight: 400,
                 fontStyle: "italic",
                 color: colors.primaryText,
-                mb: { xs: 1, sm: 2, md: 4 }, // Reduced on mobile
-                mt: { xs: 0.2, sm: 0.5, md: 1 }, // Reduced on mobile
+                mb: { xs: 1.5, sm: 2, md: 4 },
+                mt: { xs: 0.3, sm: 0.5, md: 1 },
                 transition: "color 0.3s ease",
               }}
             >
@@ -303,7 +303,7 @@ export default function HeroSection() {
             </Typography>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Responsive sizing */}
           <motion.div variants={buttonVariants}>
             <Stack
               direction={{ xs: "row", sm: "row" }}
