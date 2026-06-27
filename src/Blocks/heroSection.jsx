@@ -87,12 +87,11 @@ export default function HeroSection() {
         minHeight: "100vh",
         height: "100vh",
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.background,
         overflow: "hidden",
         px: { xs: 2, sm: 3, md: 6, lg: 10 },
-        pt: { xs: 12, sm: 14, md: 16 },
         transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
@@ -137,29 +136,31 @@ export default function HeroSection() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: { xs: "center", md: "center" },
+          flexDirection: { xs: "column", sm: "column", md: "row" },
+          alignItems: { xs: "center", sm: "center", md: "center" },
           justifyContent: "space-between",
           width: "100%",
           maxWidth: "1500px",
-          gap: { xs: 3, md: 4, lg: 0 },
+          gap: { xs: 2, sm: 2.5, md: 4, lg: 0 },
           position: "relative",
           zIndex: 2,
-          height: { xs: "auto", md: "100%" },
+          height: { xs: "auto", sm: "auto", md: "100%" },
+          minHeight: { xs: "auto", sm: "auto", md: "100%" },
+          py: { xs: 1.5, sm: 2, md: 0 },
         }}
       >
-        {/* Mobile Layout: Avatar + Heading Row */}
+        {/* Mobile/Tablet Layout: Avatar + Heading Row */}
         <Box
           sx={{
-            display: { xs: "flex", md: "none" },
+            display: { xs: "flex", sm: "flex", md: "none" },
             flexDirection: "row",
             alignItems: "center",
-            gap: 2.5,
+            gap: { xs: 2, sm: 2.5 },
             width: "100%",
-            mb: 2,
+            mb: { xs: 1, sm: 1.5 },
           }}
         >
-          {/* Small Avatar for Mobile */}
+          {/* Small Avatar for Mobile/Tablet */}
           <motion.div
             variants={avatarVariants}
             initial="hidden"
@@ -168,8 +169,8 @@ export default function HeroSection() {
           >
             <Box
               sx={{
-                width: "65px",
-                height: "65px",
+                width: { xs: "60px", sm: "70px" },
+                height: { xs: "60px", sm: "70px" },
                 borderRadius: "50%",
                 backgroundColor: "#F3F3F3",
                 display: "flex",
@@ -197,7 +198,7 @@ export default function HeroSection() {
             </Box>
           </motion.div>
 
-          {/* Mobile Heading - Small */}
+          {/* Mobile/Tablet Heading */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -209,7 +210,7 @@ export default function HeroSection() {
                 variant="h1"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: "1.6rem",
+                  fontSize: { xs: "1.5rem", sm: "1.8rem" },
                   fontWeight: 400,
                   color: colors.primaryText,
                   lineHeight: 1.15,
@@ -224,7 +225,7 @@ export default function HeroSection() {
           </motion.div>
         </Box>
 
-        {/* Left Column - Desktop & Tablet */}
+        {/* Left Column */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -237,17 +238,17 @@ export default function HeroSection() {
         >
           <Box
             sx={{
-              flex: { xs: "1 1 100%", md: "0 0 58%" },
-              maxWidth: { xs: "100%", md: "58%" },
+              flex: { xs: "1 1 100%", sm: "1 1 100%", md: "0 0 58%" },
+              maxWidth: { xs: "100%", sm: "100%", md: "58%" },
               width: "100%",
               display: "flex",
               flexDirection: "column",
-              justifyContent: { xs: "flex-start", md: "center" },
-              height: { xs: "auto", md: "100%" },
+              justifyContent: { xs: "flex-start", sm: "flex-start", md: "center" },
+              height: { xs: "auto", sm: "auto", md: "100%" },
             }}
           >
-            {/* Desktop Heading - Hidden on Mobile */}
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
+            {/* Desktop Heading - Hidden on Mobile/Tablet */}
+            <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
               <motion.div variants={itemVariants}>
                 <Typography
                   variant="h1"
@@ -269,19 +270,24 @@ export default function HeroSection() {
               </motion.div>
             </Box>
 
-            {/* Description Paragraph - Larger font on mobile */}
+            {/* Description Paragraph */}
             <motion.div variants={itemVariants}>
               <Typography
                 variant="body1"
                 sx={{
                   fontFamily: "'Inter', 'Manrope', sans-serif",
-                  fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem", lg: "1.35rem" },
+                  fontSize: { 
+                    xs: "0.95rem", 
+                    sm: "1rem", 
+                    md: "1.1rem", 
+                    lg: "1.35rem" 
+                  },
                   fontWeight: 500,
                   color: colors.secondaryText,
                   lineHeight: { xs: 1.6, sm: 1.6, md: 1.8 },
-                  maxWidth: { xs: "100%", md: "620px" },
-                  mt: { xs: 1.5, sm: 2, md: 3 },
-                  mb: { xs: 1, sm: 1.2, md: 2.5 },
+                  maxWidth: { xs: "100%", sm: "100%", md: "620px" },
+                  mt: { xs: 0.5, sm: 0.8, md: 3 },
+                  mb: { xs: 0.8, sm: 1, md: 2.5 },
                   transition: "color 0.3s ease",
                 }}
               >
@@ -289,18 +295,23 @@ export default function HeroSection() {
               </Typography>
             </motion.div>
 
-            {/* Personal Motto - Larger font on mobile */}
+            {/* Personal Motto */}
             <motion.div variants={itemVariants}>
               <Typography
                 variant="h5"
                 sx={{
                   fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: { xs: "1rem", sm: "1.1rem", md: "1.4rem", lg: "1.8rem" },
+                  fontSize: { 
+                    xs: "1rem", 
+                    sm: "1.1rem", 
+                    md: "1.4rem", 
+                    lg: "1.8rem" 
+                  },
                   fontWeight: 400,
                   fontStyle: "italic",
                   color: colors.primaryText,
-                  mb: { xs: 1.5, sm: 2, md: 4 },
-                  mt: { xs: 0.5, sm: 0.5, md: 1 },
+                  mb: { xs: 1.2, sm: 1.5, md: 4 },
+                  mt: { xs: 0.3, sm: 0.5, md: 1 },
                   transition: "color 0.3s ease",
                 }}
               >
@@ -308,30 +319,42 @@ export default function HeroSection() {
               </Typography>
             </motion.div>
 
-            {/* CTA Buttons - Larger on mobile */}
+            {/* CTA Buttons */}
             <motion.div variants={buttonVariants}>
               <Stack
-                direction={{ xs: "row", sm: "row" }}
-                spacing={{ xs: 1.5, sm: 2 }}
-                sx={{ gap: { xs: "12px", sm: "16px" }, flexWrap: "wrap" }}
+                direction={{ xs: "row", sm: "row", md: "row" }}
+                spacing={{ xs: 1.5, sm: 2, md: 2.5 }}
+                sx={{ gap: { xs: "12px", sm: "16px", md: "20px" }, flexWrap: "wrap" }}
               >
                 <Button
                   variant="contained"
                   onClick={() => navigate('/projects')}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "18px", md: "20px" } }} />}
+                  endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "18px", sm: "20px", md: "20px" } }} />}
                   sx={{
                     backgroundColor: colors.buttonPrimaryBg,
                     color: colors.buttonPrimaryText,
                     fontWeight: 600,
-                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
-                    px: { xs: "18px", sm: "24px", md: "32px" },
-                    py: { xs: "10px", sm: "12px", md: "18px" },
+                    fontSize: { 
+                      xs: "0.85rem", 
+                      sm: "0.9rem", 
+                      md: "1rem" 
+                    },
+                    px: { 
+                      xs: "18px", 
+                      sm: "22px", 
+                      md: "32px" 
+                    },
+                    py: { 
+                      xs: "10px", 
+                      sm: "12px", 
+                      md: "18px" 
+                    },
                     borderRadius: "10px",
                     textTransform: "none",
                     transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
-                    minWidth: { xs: "auto", sm: "auto" },
+                    minWidth: { xs: "auto", sm: "auto", md: "auto" },
                     "&:hover": {
                       backgroundColor: colors.buttonPrimaryHover,
                       transform: "translateY(-2px)",
@@ -354,13 +377,25 @@ export default function HeroSection() {
                     borderColor: colors.buttonSecondaryBorder,
                     color: colors.buttonSecondaryText,
                     fontWeight: 500,
-                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
-                    px: { xs: "18px", sm: "24px", md: "32px" },
-                    py: { xs: "10px", sm: "12px", md: "18px" },
+                    fontSize: { 
+                      xs: "0.85rem", 
+                      sm: "0.9rem", 
+                      md: "1rem" 
+                    },
+                    px: { 
+                      xs: "18px", 
+                      sm: "22px", 
+                      md: "32px" 
+                    },
+                    py: { 
+                      xs: "10px", 
+                      sm: "12px", 
+                      md: "18px" 
+                    },
                     borderRadius: "10px",
                     textTransform: "none",
                     transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
-                    minWidth: { xs: "auto", sm: "auto" },
+                    minWidth: { xs: "auto", sm: "auto", md: "auto" },
                     "&:hover": {
                       backgroundColor: colors.buttonSecondaryHoverBg,
                       color: colors.buttonSecondaryHoverText,
@@ -376,10 +411,10 @@ export default function HeroSection() {
           </Box>
         </motion.div>
 
-        {/* Right Column - Avatar (Desktop & Tablet) */}
+        {/* Right Column - Avatar (Desktop only) */}
         <Box
           sx={{
-            display: { xs: "none", md: "flex" },
+            display: { xs: "none", sm: "none", md: "flex" },
             flex: "0 0 42%",
             maxWidth: "42%",
             width: "100%",
