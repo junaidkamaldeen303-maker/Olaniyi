@@ -4,7 +4,7 @@ import { Box, Typography, Button, Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useTheme } from "../themes/theme";
-import comicImage from "../assets/Comic.png"; // ✅ Import the image directly
+import comicImage from "../assets/Comic.png";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -264,19 +264,19 @@ export default function HeroSection() {
             </motion.div>
           </Box>
 
-          {/* Description Paragraph - Reduced top margin on mobile/tablet */}
+          {/* Description Paragraph - Reduced spacing on mobile */}
           <motion.div variants={itemVariants}>
             <Typography
               variant="body1"
               sx={{
                 fontFamily: "'Inter', 'Manrope', sans-serif",
-                fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
+                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
                 fontWeight: 500,
                 color: colors.secondaryText,
-                lineHeight: { xs: 1.5, sm: 1.6, md: 1.8 },
+                lineHeight: { xs: 1.4, sm: 1.5, md: 1.8 },
                 maxWidth: { xs: "100%", md: "620px" },
-                mt: { xs: 0.5, sm: 1, md: 3 },
-                mb: { xs: 1, sm: 1.5, md: 2.5 },
+                mt: { xs: 0.3, sm: 0.5, md: 3 },
+                mb: { xs: 0.5, sm: 1, md: 2.5 },
                 transition: "color 0.3s ease",
               }}
             >
@@ -284,18 +284,18 @@ export default function HeroSection() {
             </Typography>
           </motion.div>
 
-          {/* Personal Motto - Reduced spacing on mobile/tablet */}
+          {/* Personal Motto - Reduced spacing on mobile */}
           <motion.div variants={itemVariants}>
             <Typography
               variant="h5"
               sx={{
                 fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.4rem", lg: "1.8rem" },
+                fontSize: { xs: "0.85rem", sm: "1rem", md: "1.4rem", lg: "1.8rem" },
                 fontWeight: 400,
                 fontStyle: "italic",
                 color: colors.primaryText,
-                mb: { xs: 1.5, sm: 2, md: 4 },
-                mt: { xs: 0.3, sm: 0.5, md: 1 },
+                mb: { xs: 1, sm: 1.5, md: 4 },
+                mt: { xs: 0.2, sm: 0.3, md: 1 },
                 transition: "color 0.3s ease",
               }}
             >
@@ -307,8 +307,8 @@ export default function HeroSection() {
           <motion.div variants={buttonVariants}>
             <Stack
               direction={{ xs: "row", sm: "row" }}
-              spacing={{ xs: 1, sm: 2 }}
-              sx={{ gap: { xs: "8px", sm: "16px" }, flexWrap: "wrap" }}
+              spacing={{ xs: 0.8, sm: 1.5 }}
+              sx={{ gap: { xs: "6px", sm: "12px" }, flexWrap: "wrap" }}
             >
               <Button
                 variant="contained"
@@ -321,8 +321,8 @@ export default function HeroSection() {
                   color: colors.buttonPrimaryText,
                   fontWeight: 600,
                   fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
-                  px: { xs: "14px", sm: "20px", md: "32px" },
-                  py: { xs: "8px", sm: "12px", md: "18px" },
+                  px: { xs: "12px", sm: "18px", md: "32px" },
+                  py: { xs: "8px", sm: "10px", md: "18px" },
                   borderRadius: "10px",
                   textTransform: "none",
                   transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
@@ -350,8 +350,8 @@ export default function HeroSection() {
                   color: colors.buttonSecondaryText,
                   fontWeight: 500,
                   fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
-                  px: { xs: "14px", sm: "20px", md: "32px" },
-                  py: { xs: "8px", sm: "12px", md: "18px" },
+                  px: { xs: "12px", sm: "18px", md: "32px" },
+                  py: { xs: "8px", sm: "10px", md: "18px" },
                   borderRadius: "10px",
                   textTransform: "none",
                   transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",

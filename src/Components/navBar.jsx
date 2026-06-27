@@ -84,7 +84,7 @@ export default function NavBar() {
       ? (darkMode ? "rgba(10,10,10,0.85)" : "rgba(255,255,255,0.85)")
       : "transparent",
     
-    // Border - White outline for dark mode when scrolled
+    // Border
     borderColor: scrolled 
       ? (darkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)")
       : "transparent",
@@ -278,17 +278,36 @@ export default function NavBar() {
             </Box>
           )}
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button + Theme Toggle */}
           {isMobile && (
-            <IconButton
-              onClick={() => setDrawerOpen(true)}
-              sx={{ 
-                color: colors.menuButtonColor,
-                transition: "color 0.3s ease",
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              {/* Theme Toggle - Now visible on mobile */}
+              <IconButton
+                onClick={toggleDarkMode}
+                sx={{ 
+                  color: !scrolled 
+                    ? (darkMode ? "#FFFFFF" : "#6420F3")
+                    : (darkMode ? "#FFD700" : "#6420F3"),
+                  transition: "color 0.3s ease",
+                  padding: "8px",
+                }}
+              >
+                {darkMode ? <Sun size={20} weight="fill" /> : <Moon size={20} weight="fill" />}
+              </IconButton>
+
+              {/* Menu Button */}
+              <IconButton
+                onClick={() => setDrawerOpen(true)}
+                sx={{ 
+                  color: !scrolled 
+                    ? (darkMode ? "#FFFFFF" : "#6420F3")
+                    : "text.primary",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
           )}
         </Toolbar>
 
