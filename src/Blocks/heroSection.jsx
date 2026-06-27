@@ -84,15 +84,15 @@ export default function HeroSection() {
       ref={containerRef}
       sx={{
         position: "relative",
-        minHeight: "100vh",
-        height: "100vh",
+        minHeight: { xs: "auto", md: "100vh" },
+        height: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.background,
         overflow: "hidden",
         px: { xs: 2, sm: 3, md: 6, lg: 10 },
-        py: { xs: 2, md: 6 },
+        py: { xs: 1, md: 6 },
         transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
@@ -146,8 +146,8 @@ export default function HeroSection() {
           position: "relative",
           zIndex: 2,
           height: { xs: "auto", md: "100%" },
-          minHeight: { xs: "90vh", md: "100%" },
-          py: { xs: 4, md: 0 },
+          minHeight: { xs: "auto", md: "100%" },
+          py: { xs: 0.5, md: 0 },
         }}
       >
         {/* Mobile Layout: Avatar + Heading Row */}
@@ -158,7 +158,7 @@ export default function HeroSection() {
             alignItems: "center",
             gap: 2,
             width: "100%",
-            mb: 1,
+            mb: 0.2,
           }}
         >
           {/* Small Avatar for Mobile */}
@@ -232,142 +232,150 @@ export default function HeroSection() {
           initial="hidden"
           animate="visible"
           style={{
-            flex: { xs: "1 1 100%", md: "0 0 58%" },
-            maxWidth: { xs: "100%", md: "58%" },
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            height: { xs: "auto", md: "100%" },
           }}
         >
-          {/* Desktop Heading - Hidden on Mobile */}
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
+          <Box
+            sx={{
+              flex: { xs: "1 1 100%", md: "0 0 58%" },
+              maxWidth: { xs: "100%", md: "58%" },
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: { xs: "flex-start", md: "center" },
+              height: { xs: "auto", md: "100%" },
+            }}
+          >
+            {/* Desktop Heading - Hidden on Mobile */}
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
+              <motion.div variants={itemVariants}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontFamily: "'Playfair Display', 'Instrument Serif', serif",
+                    fontSize: { xs: "2.8rem", sm: "3.5rem", md: "4.5rem", lg: "5.5rem", xl: "6.5rem" },
+                    fontWeight: 400,
+                    color: colors.primaryText,
+                    lineHeight: 0.95,
+                    letterSpacing: "-0.02em",
+                    mb: 1,
+                    transition: "color 0.3s ease",
+                  }}
+                >
+                  Hey there, <span style={{ fontStyle: "italic" }}>I'm</span>
+                  <br />
+                  <span style={{ fontStyle: "italic" }}>Olaniyi Kamal.</span>
+                </Typography>
+              </motion.div>
+            </Box>
+
+            {/* Description Paragraph - Minimal spacing on mobile */}
             <motion.div variants={itemVariants}>
               <Typography
-                variant="h1"
+                variant="body1"
                 sx={{
-                  fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                  fontSize: { xs: "2.8rem", sm: "3.5rem", md: "4.5rem", lg: "5.5rem", xl: "6.5rem" },
-                  fontWeight: 400,
-                  color: colors.primaryText,
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.02em",
-                  mb: 1,
+                  fontFamily: "'Inter', 'Manrope', sans-serif",
+                  fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
+                  fontWeight: 500,
+                  color: colors.secondaryText,
+                  lineHeight: { xs: 1.4, sm: 1.5, md: 1.8 },
+                  maxWidth: { xs: "100%", md: "620px" },
+                  mt: 0,
+                  mb: { xs: 0.3, sm: 0.5, md: 2.5 },
                   transition: "color 0.3s ease",
                 }}
               >
-                Hey there, <span style={{ fontStyle: "italic" }}>I'm</span>
-                <br />
-                <span style={{ fontStyle: "italic" }}>Olaniyi Kamal.</span>
+                I'm a software developer building scalable, simple digital products across education, healthcare, developer tools, cloud systems, blockchain systems, LLMs, and more.
               </Typography>
             </motion.div>
+
+            {/* Personal Motto - Minimal spacing on mobile */}
+            <motion.div variants={itemVariants}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontFamily: "'Playfair Display', 'Instrument Serif', serif",
+                  fontSize: { xs: "0.85rem", sm: "1rem", md: "1.4rem", lg: "1.8rem" },
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  color: colors.primaryText,
+                  mb: { xs: 0.5, sm: 1, md: 4 },
+                  mt: 0,
+                  transition: "color 0.3s ease",
+                }}
+              >
+                I ship really cool stuff.
+              </Typography>
+            </motion.div>
+
+            {/* CTA Buttons - Responsive sizing */}
+            <motion.div variants={buttonVariants}>
+              <Stack
+                direction={{ xs: "row", sm: "row" }}
+                spacing={{ xs: 0.8, sm: 1.5 }}
+                sx={{ gap: { xs: "6px", sm: "12px" }, flexWrap: "wrap" }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={() => navigate('/projects')}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "14px", md: "20px" } }} />}
+                  sx={{
+                    backgroundColor: colors.buttonPrimaryBg,
+                    color: colors.buttonPrimaryText,
+                    fontWeight: 600,
+                    fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
+                    px: { xs: "12px", sm: "18px", md: "32px" },
+                    py: { xs: "8px", sm: "10px", md: "18px" },
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
+                    minWidth: { xs: "auto", sm: "auto" },
+                    "&:hover": {
+                      backgroundColor: colors.buttonPrimaryHover,
+                      transform: "translateY(-2px)",
+                      boxShadow: "none",
+                    },
+                    "& .MuiButton-endIcon": {
+                      marginLeft: { xs: "2px", md: "8px" },
+                    },
+                  }}
+                >
+                  View Projects
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  onClick={() => navigate('/contact')}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  sx={{
+                    borderColor: colors.buttonSecondaryBorder,
+                    color: colors.buttonSecondaryText,
+                    fontWeight: 500,
+                    fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
+                    px: { xs: "12px", sm: "18px", md: "32px" },
+                    py: { xs: "8px", sm: "10px", md: "18px" },
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
+                    minWidth: { xs: "auto", sm: "auto" },
+                    "&:hover": {
+                      backgroundColor: colors.buttonSecondaryHoverBg,
+                      color: colors.buttonSecondaryHoverText,
+                      borderColor: colors.buttonSecondaryHoverBg,
+                      transform: "translateY(-2px)",
+                    },
+                  }}
+                >
+                  Get In Touch
+                </Button>
+              </Stack>
+            </motion.div>
           </Box>
-
-          {/* Description Paragraph - Reduced spacing on mobile */}
-          <motion.div variants={itemVariants}>
-            <Typography
-              variant="body1"
-              sx={{
-                fontFamily: "'Inter', 'Manrope', sans-serif",
-                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1.1rem", lg: "1.35rem" },
-                fontWeight: 500,
-                color: colors.secondaryText,
-                lineHeight: { xs: 1.4, sm: 1.5, md: 1.8 },
-                maxWidth: { xs: "100%", md: "620px" },
-                mt: { xs: 0.3, sm: 0.5, md: 3 },
-                mb: { xs: 0.5, sm: 1, md: 2.5 },
-                transition: "color 0.3s ease",
-              }}
-            >
-              I'm a software developer building scalable, simple digital products across education, healthcare, developer tools, cloud systems, blockchain systems, LLMs, and more.
-            </Typography>
-          </motion.div>
-
-          {/* Personal Motto - Reduced spacing on mobile */}
-          <motion.div variants={itemVariants}>
-            <Typography
-              variant="h5"
-              sx={{
-                fontFamily: "'Playfair Display', 'Instrument Serif', serif",
-                fontSize: { xs: "0.85rem", sm: "1rem", md: "1.4rem", lg: "1.8rem" },
-                fontWeight: 400,
-                fontStyle: "italic",
-                color: colors.primaryText,
-                mb: { xs: 1, sm: 1.5, md: 4 },
-                mt: { xs: 0.2, sm: 0.3, md: 1 },
-                transition: "color 0.3s ease",
-              }}
-            >
-              I ship really cool stuff.
-            </Typography>
-          </motion.div>
-
-          {/* CTA Buttons - Responsive sizing */}
-          <motion.div variants={buttonVariants}>
-            <Stack
-              direction={{ xs: "row", sm: "row" }}
-              spacing={{ xs: 0.8, sm: 1.5 }}
-              sx={{ gap: { xs: "6px", sm: "12px" }, flexWrap: "wrap" }}
-            >
-              <Button
-                variant="contained"
-                onClick={() => navigate('/projects')}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-                endIcon={<ArrowDownwardIcon sx={{ fontSize: { xs: "14px", md: "20px" } }} />}
-                sx={{
-                  backgroundColor: colors.buttonPrimaryBg,
-                  color: colors.buttonPrimaryText,
-                  fontWeight: 600,
-                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
-                  px: { xs: "12px", sm: "18px", md: "32px" },
-                  py: { xs: "8px", sm: "10px", md: "18px" },
-                  borderRadius: "10px",
-                  textTransform: "none",
-                  transition: "all 250ms ease, background-color 0.3s ease, color 0.3s ease",
-                  minWidth: { xs: "auto", sm: "auto" },
-                  "&:hover": {
-                    backgroundColor: colors.buttonPrimaryHover,
-                    transform: "translateY(-2px)",
-                    boxShadow: "none",
-                  },
-                  "& .MuiButton-endIcon": {
-                    marginLeft: { xs: "2px", md: "8px" },
-                  },
-                }}
-              >
-                View Projects
-              </Button>
-
-              <Button
-                variant="outlined"
-                onClick={() => navigate('/contact')}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-                sx={{
-                  borderColor: colors.buttonSecondaryBorder,
-                  color: colors.buttonSecondaryText,
-                  fontWeight: 500,
-                  fontSize: { xs: "0.7rem", sm: "0.8rem", md: "1rem" },
-                  px: { xs: "12px", sm: "18px", md: "32px" },
-                  py: { xs: "8px", sm: "10px", md: "18px" },
-                  borderRadius: "10px",
-                  textTransform: "none",
-                  transition: "all 250ms ease, border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease",
-                  minWidth: { xs: "auto", sm: "auto" },
-                  "&:hover": {
-                    backgroundColor: colors.buttonSecondaryHoverBg,
-                    color: colors.buttonSecondaryHoverText,
-                    borderColor: colors.buttonSecondaryHoverBg,
-                    transform: "translateY(-2px)",
-                  },
-                }}
-              >
-                Get In Touch
-              </Button>
-            </Stack>
-          </motion.div>
         </motion.div>
 
         {/* Right Column - Avatar (Desktop & Tablet) */}
